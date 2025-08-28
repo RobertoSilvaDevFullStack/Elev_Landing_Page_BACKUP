@@ -1,6 +1,7 @@
 // components/ImageManager.tsx
 // Gerenciamento otimizado de todas as imagens do projeto
 
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 // Utilitário para lazy loading mais eficiente
@@ -126,6 +127,11 @@ export const FloorPlan = ({ type = "37m2", className = "", showTitle = true }: {
         alt: "Planta apartamento 1 dormitório - 25m²",
         title: "1 Dormitório - 25m²"
       },
+      "34m2": {
+        src: "/images/floorplans/planta-2-dorm-34m2.jpg",
+        alt: "Planta apartamento 2 dormitórios - 34m²",
+        title: "2 Dormitórios - 34m²"
+      },
       "37m2": {
         src: "/images/floorplans/planta-2-dorm-suite-37m2.jpg",
         alt: "Planta apartamento 2 dormitórios com suíte - 37m²", 
@@ -160,7 +166,84 @@ export const FloorPlan = ({ type = "37m2", className = "", showTitle = true }: {
   );
 };
 
-// 6. IMPLANTAÇÃO DO TERRENO
+// 6. CARROSSEL DE PLANTAS - MCMV
+export const FloorPlanCarousel = ({ className = "" }: { className?: string }) => {
+  const [currentPlan, setCurrentPlan] = useState(0);
+
+  const floorPlans = [
+    {
+      src: "/images/floorplans/planta-1-dorm-25m2.jpg",
+      alt: "Planta apartamento 1 dormitório - 25m²",
+      title: "25m² com varanda",
+      legend: "25m² com varanda dentro da faixa 3 MCMV"
+    },
+    {
+      src: "/images/floorplans/planta-2-dorm-34m2.jpg", 
+      alt: "Planta apartamento 2 dormitórios - 34m²",
+      title: "34m² com varanda",
+      legend: "Unidade 34m² com varanda dentro da faixa 3 do MCMV"
+    },
+    {
+      src: "/images/floorplans/planta-2-dorm-suite-37m2.jpg",
+      alt: "Planta apartamento 2 dormitórios com suíte - 37m²",
+      title: "37m² com suíte",
+      legend: "37m² com suíte e varanda - unidade R2V dentro da faixa 4 do MCMV"
+    }
+  ];
+
+  // Auto-advance carousel every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPlan((prev) => (prev + 1) % floorPlans.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [floorPlans.length]);
+
+  const currentFloorPlan = floorPlans[currentPlan];
+
+  return (
+    <div className={`relative ${className}`}>
+      <div className="bg-white rounded-2xl p-6 shadow-lg">
+        <div className="relative">
+          <Image
+            src={currentFloorPlan.src}
+            alt={currentFloorPlan.alt}
+            width={600}
+            height={450}
+            className="w-full rounded-xl transition-opacity duration-500"
+            placeholder="blur"
+            blurDataURL={createBlurDataURL(600, 450)}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+          />
+          
+          {/* Legend Overlay */}
+          <div className="absolute bottom-4 left-4 right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-lg shadow-lg">
+            <h3 className="font-bold text-lg mb-1">{currentFloorPlan.title}</h3>
+            <p className="text-sm opacity-90">{currentFloorPlan.legend}</p>
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="absolute top-4 right-4 flex space-x-2">
+            {floorPlans.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPlan(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentPlan 
+                    ? 'bg-blue-600 scale-125' 
+                    : 'bg-white/70 hover:bg-white/90'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 7. IMPLANTAÇÃO DO TERRENO
 export const SitePlan = ({ className = "" }: { className?: string }) => {
   return (
     <div className={`relative ${className}`}>
@@ -400,6 +483,7 @@ const ImageManager = {
   LogoMinhaCasa,
   BrandLogos,
   FloorPlan,
+  FloorPlanCarousel,
   SitePlan,
   ApartmentGallery,
   AmenitiesGallery,

@@ -685,8 +685,8 @@ function ElevSacomaLanding() {
             </div>
 
             <div className="space-y-6">
-              {/* Planta do Apartamento */}
-              <ImageManager.FloorPlan type="37m2" showTitle={false} />
+              {/* Carrossel de Plantas - MCMV */}
+              <ImageManager.FloorPlanCarousel />
               
               <div className="bg-white p-8 rounded-2xl shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
