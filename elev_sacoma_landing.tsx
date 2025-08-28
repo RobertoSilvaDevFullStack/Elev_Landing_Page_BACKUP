@@ -743,13 +743,24 @@ function ElevSacomaLanding() {
               </div>
 
               <div className="bg-purple-50 border border-purple-200 p-6 rounded-xl">
-                <h4 className="font-bold text-purple-800 mb-3">✨ Diferenciais da Suíte:</h4>
-                <div className="space-y-2 text-sm text-purple-700">
-                  <p>✓ Banheiro privativo com acabamentos premium</p>
-                  <p>✓ Closet integrado ao quarto</p>
-                  <p>✓ Janela com vista privilegiada</p>
-                  <p>✓ Pré-instalação para ar-condicionado</p>
-                  <p>✓ Tomadas USB e pontos de internet</p>
+                <div className="grid md:grid-cols-5 gap-6 items-center">
+                  {/* Left Column - Text Content (3/5 width) */}
+                  <div className="md:col-span-3">
+                    <h4 className="font-bold text-purple-800 mb-3">✨ Diferenciais da Suíte:</h4>
+                    <div className="space-y-2 text-sm text-purple-700">
+                      <p>✓ Banheiro privativo com acabamentos premium</p>
+                      <p>✓ Closet integrado ao quarto</p>
+                      <p>✓ Janela com vista privilegiada</p>
+                      <p>✓ Tomadas USB e pontos de internet</p>
+                    </div>
+                  </div>
+                  
+                  {/* Right Column - Faixa 4 MCMV Logo (2/5 width) */}
+                  <div className="md:col-span-2 flex justify-center items-center">
+                    <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 flex items-center justify-center">
+                      <ImageManager.LogoFaixa4MCMV size={180} className="drop-shadow-lg w-full h-full object-contain" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

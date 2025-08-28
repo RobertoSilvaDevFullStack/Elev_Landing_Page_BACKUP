@@ -195,7 +195,7 @@ export const FloorPlanCarousel = ({ className = "" }: { className?: string }) =>
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPlan((prev) => (prev + 1) % floorPlans.length);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [floorPlans.length]);
@@ -473,6 +473,22 @@ export const LogoMinhaCasa = ({ className = "", size = 80 }: { className?: strin
   );
 };
 
+// 12. FAIXA 4 MINHA CASA MINHA VIDA
+export const LogoFaixa4MCMV = ({ className = "", size = 120 }: { className?: string, size?: number }) => {
+  return (
+    <Image
+      src="/images/hero/faixa-4-do-minha-casa-minha-vida-capa.png"
+      alt="Faixa 4 do Minha Casa Minha Vida - Apartamentos com Suíte"
+      width={size}
+      height={size}
+      className={`object-contain ${className}`}
+      placeholder="blur"
+      blurDataURL={createBlurDataURL(size, size)}
+      sizes="(max-width: 768px) 100px, (max-width: 1200px) 120px, 140px"
+    />
+  );
+};
+
 // Objeto principal para exportação
 const ImageManager = {
   HeroBuilding,
@@ -481,6 +497,7 @@ const ImageManager = {
   LogoElev,
   LogoTrisul,
   LogoMinhaCasa,
+  LogoFaixa4MCMV,
   BrandLogos,
   FloorPlan,
   FloorPlanCarousel,
