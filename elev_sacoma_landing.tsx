@@ -582,9 +582,9 @@ function ElevSacomaLanding() {
               </div>
 
               <div className="bg-yellow-50 border border-yellow-200 p-6 rounded-xl">
-                <div className="grid md:grid-cols-3 gap-6 items-center">
-                  {/* Left Column - Text Content (2/3 width) */}
-                  <div className="md:col-span-2">
+                <div className="grid md:grid-cols-5 gap-6 items-center">
+                  {/* Left Column - Text Content (3/5 width) */}
+                  <div className="md:col-span-3">
                     <h4 className="font-bold text-yellow-800 mb-3">⚡ Condições Especiais Primeira Compra:</h4>
                     <div className="space-y-2 text-sm text-yellow-700">
                       <p>✓ Entrada com FGTS (sem desembolso)</p>
@@ -595,9 +595,11 @@ function ElevSacomaLanding() {
                     </div>
                   </div>
                   
-                  {/* Right Column - Logo Minha Casa Minha Vida */}
-                  <div className="flex justify-center">
-                    <ImageManager.LogoMinhaCasa size={96} className="drop-shadow-md" />
+                  {/* Right Column - Logo Minha Casa Minha Vida (2/5 width) */}
+                  <div className="md:col-span-2 flex justify-center items-center">
+                    <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 flex items-center justify-center">
+                      <ImageManager.LogoMinhaCasa size={180} className="drop-shadow-lg w-full h-full object-contain" />
+                    </div>
                   </div>
                 </div>
               </div>
