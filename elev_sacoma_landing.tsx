@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import Image from 'next/image';
 import { MapPin, Phone, MessageCircle, Users, Star, CheckCircle, Building, TreePine, Car, Shield } from 'lucide-react';
 import ImageManager from './components/ImageManager';
 
@@ -149,6 +150,14 @@ function ElevSacomaLanding() {
     );
     window.open(`https://wa.me/5511999999999?text=${whatsappMessage}`, '_blank');
   }, [formData]);
+
+  // WhatsApp click for financing simulation
+  const handleWhatsAppClick = useCallback(() => {
+    const whatsappMessage = encodeURIComponent(
+      `Olá! Vim da landing page do ELEV Park Sacomã II. Gostaria de simular um financiamento e saber mais sobre as condições especiais para primeira compra. Pode me ajudar?`
+    );
+    window.open(`https://wa.me/5511999999999?text=${whatsappMessage}`, '_blank');
+  }, []);
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData(prev => ({
@@ -405,6 +414,85 @@ function ElevSacomaLanding() {
                 <p className="text-center text-xs text-gray-600 mt-3">
                   Seus dados estão seguros conosco 🔒
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Condições Especiais Primeira Compra */}
+      <section className="py-16 bg-gradient-to-r from-orange-50 to-yellow-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Left Column - Content */}
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                  <span className="text-orange-600">⚡</span> Condições Especiais Primeira Compra
+                </h2>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="text-lg text-gray-700">Entrada com FGTS (sem desembolso)</span>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="text-lg text-gray-700">Parcelas menores que aluguel</span>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="text-lg text-gray-700">Escritura e ITBI grátis</span>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="text-lg text-gray-700">Assessoria jurídica inclusa</span>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="text-lg text-gray-700">Financiamento até 35 anos</span>
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <button 
+                    onClick={handleWhatsAppClick}
+                    className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg text-lg"
+                  >
+                    SIMULAR FINANCIAMENTO 📊
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Column - Minha Casa Minha Vida Logo */}
+              <div className="flex justify-center">
+                <div className="relative max-w-sm">
+                  <Image
+                    src="/images/hero/logo_minha_casa_minha_vida.png"
+                    alt="Financiamento Facilitado - Minha Casa Minha Vida"
+                    width={400}
+                    height={400}
+                    className="w-full h-auto object-contain drop-shadow-lg"
+                    priority={false}
+                  />
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded-full shadow-lg">
+                    <span className="text-sm font-bold text-orange-600">FINANCIAMENTO FACILITADO</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
