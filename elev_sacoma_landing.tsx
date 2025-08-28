@@ -757,8 +757,8 @@ function ElevSacomaLanding() {
                   
                   {/* Right Column - Faixa 4 MCMV Logo (2/5 width) */}
                   <div className="md:col-span-2 flex justify-center items-center">
-                    <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 flex items-center justify-center">
-                      <ImageManager.LogoFaixa4MCMV size={180} className="drop-shadow-lg w-full h-full object-contain" />
+                    <div className="w-40 h-40 md:w-52 md:h-52 lg:w-64 lg:h-64 flex items-center justify-center">
+                      <ImageManager.LogoFaixa4MCMV size={240} className="drop-shadow-lg w-full h-full object-contain" />
                     </div>
                   </div>
                 </div>
