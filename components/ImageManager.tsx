@@ -374,6 +374,22 @@ export const BrandLogos = ({ className = "" }: { className?: string }) => {
   );
 };
 
+// 11. LOGO MINHA CASA MINHA VIDA
+export const LogoMinhaCasa = ({ className = "", size = 80 }: { className?: string, size?: number }) => {
+  return (
+    <Image
+      src="/images/hero/logo_minha_casa_minha_vida.png"
+      alt="Minha Casa Minha Vida - Financiamento Facilitado"
+      width={size}
+      height={size}
+      className={`object-contain ${className}`}
+      placeholder="blur"
+      blurDataURL={createBlurDataURL(size, size)}
+      sizes="(max-width: 768px) 80px, (max-width: 1200px) 100px, 120px"
+    />
+  );
+};
+
 // Objeto principal para exportação
 const ImageManager = {
   HeroBuilding,
@@ -381,6 +397,7 @@ const ImageManager = {
   HeroVideo,
   LogoElev,
   LogoTrisul,
+  LogoMinhaCasa,
   BrandLogos,
   FloorPlan,
   SitePlan,
