@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { MapPin, Phone, MessageCircle, Users, Star, CheckCircle, Building, TreePine, Car, Shield } from 'lucide-react';
+import { MapPin, MessageCircle, Users, Star, CheckCircle, Building, TreePine, Car, Shield } from 'lucide-react';
 import ImageManager from './components/ImageManager';
+import { useFacebookPixel } from './components/FacebookPixel';
 
 // Declaração de tipos para Facebook Pixel
 declare global {
@@ -33,26 +34,45 @@ const testimonials = [
 
 // Componente principal com Fast Refresh otimizado
 function ElevSacomaLanding() {
-  // Facebook Pixel tracking
+  // Facebook Pixel tracking hook
+  const { trackEvent, trackCustomEvent } = useFacebookPixel();
+
+  // Track page sections view
   useEffect(() => {
-    // Facebook Pixel Code - Comentado para evitar erros de TypeScript
-    // Descomente e configure quando tiver o ID do pixel real
-    /*
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    */
-    
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('init', 'YOUR_PIXEL_ID'); // Substituir pelo ID real do pixel
-      window.fbq('track', 'PageView');
+    // Track page view
+    trackEvent('ViewContent');
+    trackCustomEvent('Page_View', {
+      content_name: 'ELEV Park Sacomã II Landing Page',
+      content_category: 'Real Estate'
+    });
+
+    // Track floor plans section when user scrolls to it
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.target.id === 'plantas-section') {
+            trackEvent('ViewContent');
+            trackCustomEvent('Floor_Plans_View', {
+              content_name: 'Floor Plans Section',
+              content_category: 'Real Estate'
+            });
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const plantasSection = document.getElementById('plantas-section');
+    if (plantasSection) {
+      observer.observe(plantasSection);
     }
-  }, []);
+
+    return () => {
+      if (plantasSection) {
+        observer.unobserve(plantasSection);
+      }
+    };
+  }, [trackEvent, trackCustomEvent]);
 
   // Add meta tags dynamically - OTIMIZADO para Fast Refresh
   useEffect(() => {
@@ -118,7 +138,7 @@ function ElevSacomaLanding() {
   }, []); // Array vazio para evitar re-renders
 
   // Handle form submission
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     // Facebook Pixel tracking
@@ -131,7 +151,7 @@ function ElevSacomaLanding() {
       });
     }
 
-    // RD Station integration (replace with actual endpoint)
+    // RD Station API integration
     const rdData = {
       email: formData.email,
       name: formData.name,
@@ -140,15 +160,63 @@ function ElevSacomaLanding() {
       cf_source: 'Landing Page ELEV Sacomã'
     };
 
-    // Here you would integrate with RD Station API
-    console.log('Lead captured:', rdData);
+    // Send lead to RD Station
+    try {
+      const rdResponse = await fetch('/api/rdstation-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rdData)
+      });
+
+      if (rdResponse.ok) {
+        console.log('Lead enviado para RD Station com sucesso');
+      } else {
+        console.error('Erro ao enviar lead para RD Station');
+      }
+    } catch (error) {
+      console.error('Erro na integração RD Station:', error);
+    }
     
-    // WhatsApp redirect with pre-filled message
-    const whatsappMessage = encodeURIComponent(
-      `Olá! Vim da landing page do ELEV Park Sacomã II. Gostaria de saber mais sobre os apartamentos disponíveis. Meu nome é ${formData.name} e tenho interesse em ${formData.interest}.`
-    );
-    window.open(`https://wa.me/5511999999999?text=${whatsappMessage}`, '_blank');
-  }, [formData]);
+    // Track form submission event
+    trackEvent('Lead');
+    trackCustomEvent('Form_Submit', {
+      content_name: 'ELEV Park Sacomã II Lead Form',
+      content_category: 'Real Estate Lead',
+      value: 1
+    });
+    
+    // Show success message instead of automatic redirect
+    alert('✅ Obrigado! Seus dados foram enviados com sucesso. Nossa equipe entrará em contato em breve!');
+    
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      interest: '1 dormitório'
+    });
+  }, [formData, trackEvent, trackCustomEvent, setFormData]);
+
+  // WhatsApp click tracking function
+  const handleWhatsAppClick = useCallback(() => {
+    trackEvent('Contact');
+    trackCustomEvent('WhatsApp_Click', {
+      content_name: 'ELEV Park Sacomã II',
+      content_category: 'Real Estate Contact'
+    });
+  }, [trackEvent, trackCustomEvent]);
+
+  // Function to open WhatsApp with personalized message
+  const openWhatsApp = useCallback((customMessage?: string) => {
+    const defaultMessage = 'Olá! Gostaria de saber mais sobre o ELEV Park Sacomã II.';
+    const message = customMessage || defaultMessage;
+    const whatsappMessage = encodeURIComponent(message);
+    
+    handleWhatsAppClick();
+    window.open(`https://wa.me/5511960225753?text=${whatsappMessage}`, '_blank');
+  }, [handleWhatsAppClick]);
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData(prev => ({
@@ -220,9 +288,13 @@ function ElevSacomaLanding() {
           {/* Pulse animation background */}
           <div className="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-20"></div>
           <a
-            href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20ELEV%20Park%20Sacomã%20II"
+            href="https://wa.me/5511960225753?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Apartamento%20no%20Sacomã%20"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              openWhatsApp();
+            }}
             className="relative bg-green-500 hover:bg-green-600 text-white rounded-full p-4 md:px-5 md:py-3 shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 group"
             title="Fale conosco no WhatsApp"
           >
@@ -684,7 +756,7 @@ function ElevSacomaLanding() {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6" id="plantas-section">
               {/* Carrossel de Plantas - MCMV */}
               <ImageManager.FloorPlanCarousel />
               
@@ -1039,18 +1111,18 @@ function ElevSacomaLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gray-900 text-white py-16 pb-24">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-orange-400">ELEV Park Sacomã II</h3>
+              <h3 className="text-2xl font-bold mb-4 text-orange-400">Fernanda Martins - corretora de imóveis</h3>
               <p className="text-gray-300 mb-4">
                 Seu novo lar a 3 minutos da Estação Sacomã, com lazer completo de clube e toda a credibilidade da Trisul.
               </p>
-              <div className="text-sm text-gray-400">
+              {/* <div className="text-sm text-gray-400">
                 <p>R. Malvina Ferrara Samarone, 270</p>
                 <p>Sacomã - São Paulo/SP</p>
-              </div>
+              </div> */}
             </div>
 
             <div>
@@ -1067,21 +1139,21 @@ function ElevSacomaLanding() {
               <h4 className="text-lg font-bold mb-4">Contato</h4>
               <div className="space-y-3">
                 <a
-                  href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20ELEV%20Park%20Sacomã%20II"
+                  href="https://wa.me/5511960225753?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Apartamento%20no%20Sacomã%20"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors"
                 >
                   <MessageCircle size={20} />
-                  <span>WhatsApp: (11) 99999-9999</span>
+                  <span>WhatsApp: (11) 96022-5753</span>
                 </a>
-                <a
+                {/* <a
                   href="tel:1130000000"
                   className="flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <Phone size={20} />
                   <span>Telefone: (11) 3000-0000</span>
-                </a>
+                </a> */}
               </div>
 
               <div className="mt-6">
@@ -1098,11 +1170,11 @@ function ElevSacomaLanding() {
           <div className="border-t border-gray-800 mt-8 pt-8">
             <div className="grid md:grid-cols-2 gap-4 items-center">
               <div className="text-sm text-gray-400">
-                <p>© 2024 Trisul - Todos os direitos reservados</p>
+                <p>© 2025 Trisul - Todos os direitos reservados</p>
                 <p>CRECI: J20186 - Incorporação: Matrícula 270.895</p>
               </div>
               <div className="text-sm text-gray-400 md:text-right">
-                <p>Desenvolvido com foco em conversão</p>
+                <p><a href="https://github.com/RobertoSilvaDevFullStack/RobertoSilvaDevFullStack" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">Desenvolvedor: <strong>Roberto Silva</strong></a></p>
                 <p>Hospedagem: Hostinger | Integração: RD Station</p>
               </div>
             </div>

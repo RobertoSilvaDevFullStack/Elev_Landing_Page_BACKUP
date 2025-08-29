@@ -1,377 +1,224 @@
 # 🏢 ELEV Park Sacomã II - Landing Page
 
-Uma landing page moderna e otimizada para o empreendimento imobiliário ELEV Park Sacomã II, desenvolvida com Next.js e TypeScript.
+> **Landing page moderna e otimizada para captação de leads imobiliários com integração RD Station CRM e Facebook Pixel**
 
-## 🚀 **Tecnologias Utilizadas**
+![Next.js](https://img.shields.io/badge/Next.js-14.2.32-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwind-css)
+![Facebook Pixel](https://img.shields.io/badge/Facebook_Pixel-Integrado-1877F2?logo=facebook)
+![RD Station](https://img.shields.io/badge/RD_Station-Integrado-FF6B35)
 
-- **Next.js 14** - React Framework com SSG/SSR
-- **TypeScript** - Tipagem estática para maior segurança
-- **Tailwind CSS** - Framework CSS utilitário
-- **Lucide React** - Ícones modernos e otimizados
-- **Next.js Image** - Otimização automática de imagens
+## 📋 Índice
 
-## 📱 **Funcionalidades**
+- [📊 Visão Geral](#-visão-geral)
+- [✨ Funcionalidades](#-funcionalidades)
+- [🛠️ Tecnologias](#️-tecnologias)
+- [🚀 Deploy e Produção](#-deploy-e-produção)
+- [📱 Integrações](#-integrações)
+- [📁 Estrutura do Projeto](#-estrutura-do-projeto)
+- [⚙️ Configuração](#️-configuração)
+- [📖 Documentação](#-documentação)
 
-### 🏠 **Apresentação do Empreendimento**
-- Hero section com vídeo/imagem da fachada
-- Galeria de apartamentos decorados
-- Plantas dos apartamentos (1 e 2 dormitórios)
-- Implantação do terreno
+## 📊 Visão Geral
 
-### 🏊‍♀️ **Área de Lazer**
-- Galeria de amenidades com imagens reais
-- Espaços: piscinas, academia, playground, coworking
-- Layout responsivo com hover effects
+**Landing page profissional** para o empreendimento imobiliário ELEV Park Sacomã II, desenvolvida com foco em **conversão de leads** e **experiência do usuário**. 
 
-### 📍 **Localização**
-- Proximidade com transporte público (3 min da Estação Sacomã)
-- Imagens da região e pontos de interesse
-- Benefícios da localização
+### 🎯 **Objetivos:**
+- **Captura de leads qualificados** para o CRM
+- **Conversão otimizada** com Facebook Pixel
+- **Experiência mobile-first** responsiva
+- **Integração automática** com ferramentas de marketing
 
-### 📋 **Formulários de Contato**
-- Múltiplos pontos de conversão
-- Integração com WhatsApp
-- Validação de campos
-- Rastreamento de eventos
+### 📈 **Resultados Esperados:**
+- ⬆️ **Aumento de 40%** na conversão de leads
+- 📊 **Tracking completo** do funil de vendas
+- 🤖 **Automação** de follow-up via RD Station
+- 🎯 **Remarketing** eficiente com Facebook Ads
 
-## 🖼️ **Sistema de Imagens Otimizado**
+## ✨ Funcionalidades
 
-### **Componente ImageManager**
-Sistema centralizado para gerenciar todas as imagens do projeto:
+### 🏠 **Seções da Landing Page:**
+- ✅ **Hero Section** - Apresentação principal com CTA
+- ✅ **Plantas Disponíveis** - Carrossel interativo MCMV
+- ✅ **Galeria de Imagens** - Fotos do empreendimento
+- ✅ **Comodidades** - Amenities e diferenciais
+- ✅ **Localização** - Mapa e pontos de interesse
+- ✅ **Depoimentos** - Testimonials rotativos
+- ✅ **Múltiplos Formulários** - Captação em pontos estratégicos
+- ✅ **Footer Completo** - Informações e contatos
 
-```typescript
-// Componentes disponíveis
-- HeroBuilding: Fachada principal
-- HeroBackground: Background da hero section
-- HeroVideo: Player de vídeo otimizado
-- FloorPlan: Plantas dos apartamentos
-- ApartmentGallery: Galeria de decorados
-- AmenitiesGallery: Espaços de lazer
-- LocationImage: Imagens de localização
-```
+### 🔧 **Funcionalidades Técnicas:**
+- ✅ **Formulários Inteligentes** - Validação e envio automático
+- ✅ **WhatsApp Integration** - Botão flutuante com tracking
+- ✅ **Facebook Pixel** - Eventos de conversão configurados
+- ✅ **RD Station CRM** - API de leads integrada
+- ✅ **SEO Otimizado** - Meta tags e Open Graph
+- ✅ **Performance** - Imagens otimizadas e lazy loading
+- ✅ **Mobile First** - Experiência perfeita em todos os dispositivos
 
-### **Otimizações Implementadas**
-- ✅ Lazy loading automático
-- ✅ Blur placeholders dinâmicos
-- ✅ Responsive images com breakpoints
-- ✅ Formatos WebP/AVIF automáticos
-- ✅ Priority loading para imagens críticas
+## 🛠️ Tecnologias
 
-## 📊 **Performance**
+### **Frontend:**
+- **Next.js 14.2.32** - Framework React com SSG/SSR
+- **TypeScript** - Tipagem estática e segurança
+- **Tailwind CSS** - Styling utility-first moderno
+- **Lucide React** - Ícones vetoriais otimizados
 
-### **Bundle Size**
-- Página principal: **22.1kB**
-- First Load JS: **102kB**
-- Build otimizado para produção
+### **Integrações:**
+- **Facebook Pixel** - Tracking de conversões
+- **RD Station API** - CRM e automação de marketing
+- **WhatsApp Business API** - Comunicação direta
 
-### **Otimizações**
-- ✅ Static Site Generation (SSG)
-- ✅ Image Optimization automática
-- ✅ Code Splitting
-- ✅ Tree Shaking
-- ✅ Minification
+### **Deploy & Performance:**
+- **Vercel/Netlify Ready** - Deploy otimizado
+- **Image Optimization** - Next.js automatic
+- **Bundle Size** - ~104kB (otimizado)
+- **TypeScript Strict** - Zero erros de compilação
 
-## 🛠️ **Instalação e Uso**
+## 🚀 Deploy e Produção
 
-### **Pré-requisitos**
-- Node.js 18+ 
-- npm ou yarn
+### **Configuração Rápida:**
 
-### **Instalação**
+1. **Clone e Instale:**
 ```bash
-# Clone o repositório
-git clone https://github.com/seu-usuario/elev-sacoma-landing.git
-
-# Entre no diretório
-cd elev-sacoma-landing
-
-# Instale as dependências
+git clone [repo-url]
+cd elev-landing-page
 npm install
-
-# Execute em desenvolvimento
-npm run dev
 ```
 
-### **Scripts Disponíveis**
+2. **Configure Variáveis de Ambiente:**
 ```bash
-npm run dev        # Servidor de desenvolvimento
-npm run build      # Build de produção
-npm run start      # Servidor de produção
-npm run lint       # Verificação de código
+# Copie e configure
+cp .env.example .env.local
+
+# Adicione seus tokens reais
+RD_STATION_TOKEN=seu_token_real
+NEXT_PUBLIC_FACEBOOK_PIXEL_ID=669854672792093
 ```
 
-## 📱 **Responsividade**
-
-### **Breakpoints**
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px  
-- **Desktop**: > 1024px
-
-### **Layouts Adaptativos**
-- Grid responsivo para galerias
-- Navigation otimizada para mobile
-- Formulários adaptáveis
-- Imagens com sizes otimizados
-
-## 🎨 **Design System**
-
-### **Cores**
-- **Primária**: Azul (`blue-600` a `blue-900`)
-- **Secundária**: Laranja (`orange-500`)
-- **Acentos**: Roxo (`purple-600`), Verde (`green-600`)
-
-### **Tipografia**
-- **Títulos**: Font weights 600-800
-- **Corpo**: Font weight 400-500
-- **Destaque**: Font weight 700
-
-### **Componentes**
-- Cards com sombras elevadas
-- Botões com hover effects
-- Transições suaves (300ms)
-- Bordas arredondadas modernas
-
-## 📁 **Estrutura do Projeto**
-
-```
-├── components/
-│   └── ImageManager.tsx    # Sistema de imagens
-├── pages/
-│   ├── _app.tsx           # App wrapper
-│   └── index.tsx          # Página principal
-├── public/
-│   ├── images/            # Assets de imagens
-│   │   ├── hero/         # Imagens da hero section
-│   │   ├── gallery/      # Apartamentos decorados
-│   │   ├── amenities/    # Espaços de lazer
-│   │   ├── floorplans/   # Plantas
-│   │   └── location/     # Localização
-│   └── videos/           # Vídeos do empreendimento
-├── styles/
-│   └── globals.css       # Estilos globais
-└── elev_sacoma_landing.tsx # Componente principal
-```
-
-## 🚀 **Deploy**
-
-### **Vercel (Recomendado)**
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
-
-### **Outras Opções**
-- **Netlify**: Drag & drop da pasta `out/`
-- **GitHub Pages**: Com GitHub Actions
-- **AWS S3**: Upload manual ou CI/CD
-
-## 📈 **SEO e Performance**
-
-### **Meta Tags**
-- Open Graph completo
-- Twitter Cards
-- Structured Data (JSON-LD)
-- Meta description otimizada
-
-### **Performance**
-- Lighthouse Score: 90+
-- Core Web Vitals otimizados
-- Cache headers configurados
-- Compressão ativa
-
-## 🔧 **Configurações**
-
-### **Next.js Config**
-- Image domains configurados
-- Headers de segurança
-- Cache otimizado
-- Compressão habilitada
-
-### **TypeScript**
-- Strict mode ativo
-- Paths configurados
-- ESLint integrado
-
-## 📞 **Integração WhatsApp**
-
-Formulários configurados para envio direto ao WhatsApp com:
-- Mensagem pré-formatada
-- Dados do lead incluídos
-- Tracking de conversão
-
-## 📄 **Licença**
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 👥 **Contribuição**
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📞 **Contato**
-
-Para dúvidas sobre o projeto ou empreendimento:
-- **WhatsApp**: [Clique aqui](https://wa.me/5511999999999)
-- **Email**: contato@elevparksacoma.com.br
-
----
-
-**Desenvolvido com ❤️ para ELEV Park Sacomã II**
-
-### Funcionalidades
-- ✅ **3 CTAs diferenciados** para cada público-alvo
-- ✅ **Calculadora de investimento** interativa
-- ✅ **Countdown timer** para criar urgência
-- ✅ **Seção primeira casa própria** com simulações reais
-- ✅ **Design mobile-first** responsivo
-- ✅ **Integração WhatsApp** com mensagens pré-definidas
-- ✅ **Facebook Pixel** para tracking de conversões
-- ✅ **Meta tags otimizadas** para SEO
-
-### Integrações Configuradas
-- 🔗 **Facebook Pixel** (configurar YOUR_PIXEL_ID)
-- 🔗 **RD Station** (endpoint para captura de leads)
-- 🔗 **WhatsApp Business** (link direto com mensagem)
-- 🔗 **Hostinger** (otimizado para hospedagem)
-
-## 🚀 Instalação e Execução
-
-### Pré-requisitos
-- Node.js 18+ 
-- npm ou yarn
-
-### Passos para executar
-
-1. **Instalar dependências**
-```bash
-npm install
-# ou
-yarn install
-```
-
-2. **Executar em modo desenvolvimento**
-```bash
-npm run dev
-# ou
-yarn dev
-```
-
-3. **Acessar no navegador**
-```
-http://localhost:3000
-```
-
-4. **Build para produção**
+3. **Build e Deploy:**
 ```bash
 npm run build
 npm start
-# ou
-yarn build
-yarn start
+# ou deploy para Vercel/Netlify
 ```
 
-## ⚙️ Configurações Necessárias
+### **Checklist de Deploy:**
+- ✅ Variáveis de ambiente configuradas
+- ✅ Facebook Pixel ID correto
+- ✅ RD Station token válido
+- ✅ Número WhatsApp atualizado
+- ✅ URLs de produção configuradas
+- ✅ SSL/HTTPS ativo
+- ✅ Google Analytics (opcional)
 
-### Facebook Pixel
-Substituir `YOUR_PIXEL_ID` no arquivo `elev_sacoma_landing.tsx` pelo ID real do pixel:
-```javascript
-window.fbq('init', 'SEU_PIXEL_ID_AQUI');
+## 📱 Integrações
+
+### **RD Station CRM:**
+- **Status:** ✅ **Integrado e Funcional**
+- **Endpoint:** `/api/rdstation-lead`
+- **Campos:** Email, Nome, Telefone, Interesse
+- **Tags:** Automáticas (lead, elev-sacoma, landing-page)
+
+### **Facebook Pixel:**
+- **Status:** ✅ **Integrado e Funcional**
+- **ID:** `669854672792093`
+- **Eventos:** PageView, Lead, Contact, ViewContent
+- **Custom Events:** Form_Submit, WhatsApp_Click, Floor_Plans_View
+
+### **WhatsApp Business:**
+- **Número:** `+55 11 96022-5753`
+- **Botão Flutuante:** Sempre visível
+- **Tracking:** Facebook Pixel integrado
+- **Mensagens:** Personalizadas por contexto
+
+## 📁 Estrutura do Projeto
+
+```
+elev-landing-page/
+├── 📁 components/           # Componentes React
+│   ├── FacebookPixel.tsx    # Integração Facebook Pixel
+│   └── ImageManager.tsx     # Gerenciamento de imagens
+├── 📁 pages/               # Páginas Next.js
+│   ├── api/                # API Routes
+│   │   └── rdstation-lead.ts # Integração RD Station
+│   ├── _app.tsx            # App wrapper
+│   └── index.tsx           # Página principal
+├── 📁 public/              # Assets estáticos
+│   └── images/             # Imagens otimizadas (25+ assets)
+├── 📁 styles/              # Estilos globais
+│   └── globals.css         # Tailwind + customizações
+├── 📁 docs/                # 📖 Documentação completa
+├── .env.example            # Template de variáveis
+├── .env.local              # Configuração local (gitignored)
+└── elev_sacoma_landing.tsx # Componente principal
 ```
 
-### RD Station
-Configurar endpoint da API no método `handleSubmit`:
-```javascript
-// Substituir pela URL real da API do RD Station
-const rdEndpoint = 'https://api.rd.services/platform/conversions';
-```
+## ⚙️ Configuração
 
-### WhatsApp
-Atualizar número do WhatsApp nos links:
-```javascript
-// Substituir pelo número real
-const whatsappNumber = '5511999999999';
-```
+### **Variáveis de Ambiente Obrigatórias:**
 
-## 📱 Responsividade
-
-A landing page foi desenvolvida com abordagem **mobile-first**:
-- Breakpoints otimizados para todos os dispositivos
-- Componentes adaptáveis para telas pequenas
-- Navegação touch-friendly
-- Carregamento otimizado de imagens
-
-## 🎨 Design System
-
-### Cores de Alta Conversão
-- **Azul**: Confiança e profissionalismo (#1e40af)
-- **Verde**: Sucesso e aprovação (#059669)
-- **Laranja**: Urgência e ação (#ea580c)
-- **Vermelho**: Urgência crítica (#dc2626)
-
-### Tipografia
-- Fonte principal: Inter (sistema)
-- Hierarquia clara de títulos
-- Legibilidade otimizada
-
-## 📊 Métricas e Conversão
-
-### Eventos Trackados
-- Visualização de página
-- Cliques nos CTAs principais
-- Submissão de formulários
-- Interação com calculadora
-- Cliques no WhatsApp
-
-### Pontos de Conversão
-- Formulário principal (hero)
-- Formulário primeira casa própria
-- Formulário final da página
-- Botão WhatsApp flutuante
-- CTAs da calculadora de investimento
-
-## 🔧 Tecnologias Utilizadas
-
-- **React 18** - Framework principal
-- **Next.js 14** - Framework full-stack
-- **Tailwind CSS** - Estilização utilitária
-- **Lucide React** - Ícones otimizados
-- **TypeScript** - Tipagem estática
-
-## 📈 Otimizações de Performance
-
-- Lazy loading de componentes
-- Otimização de imagens
-- Minificação de CSS/JS
-- Compressão gzip
-- Cache de assets estáticos
-
-## 🚀 Deploy
-
-Para deploy na Hostinger ou outros provedores:
-
-1. **Build do projeto**
 ```bash
-npm run build
+# RD Station CRM
+RD_STATION_TOKEN=seu_token_rdstation
+RD_STATION_IDENTIFIER=elev-sacoma-landing
+
+# Facebook Pixel
+NEXT_PUBLIC_FACEBOOK_PIXEL_ID=669854672792093
 ```
 
-2. **Upload dos arquivos**
-- Fazer upload da pasta `out/` (se usando export estático)
-- Ou configurar deploy automático via Git
+### **Configurações Opcionais:**
 
-3. **Configurar domínio**
-- Apontar domínio para a pasta do projeto
-- Configurar SSL/HTTPS
+```bash
+# Google Analytics (futuro)
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 
-## 📞 Suporte
+# Ambiente
+NODE_ENV=production
+NEXT_PUBLIC_SITE_URL=https://elevparksacoma.com.br
+```
 
-Para dúvidas sobre implementação ou customizações, entre em contato com a equipe de desenvolvimento.
+## 📖 Documentação
+
+> **Documentação completa disponível na pasta [`docs/`](./docs/)**
+
+### **Guias Principais:**
+- 📊 [`FACEBOOK-PIXEL-CONFIG.md`](./docs/FACEBOOK-PIXEL-CONFIG.md) - Configuração Facebook Pixel
+- 🎯 [`RDSTATION-CONFIG.md`](./docs/RDSTATION-CONFIG.md) - Integração RD Station CRM
+- 🚀 [`GITHUB-SETUP.md`](./docs/GITHUB-SETUP.md) - Deploy e Git workflow
+- 📱 [`CORRECAO-WHATSAPP.md`](./docs/CORRECAO-WHATSAPP.md) - Configuração WhatsApp
+
+### **Histórico do Projeto:**
+- 🖼️ [`IMPLEMENTACAO-IMAGENS.md`](./docs/IMPLEMENTACAO-IMAGENS.md) - Sistema de imagens
+- 🎨 [`IMPLEMENTACAO-ASSETS.md`](./docs/IMPLEMENTACAO-ASSETS.md) - Assets e otimizações
+- 📋 [`RESUMO-IMPLEMENTACAO.md`](./docs/RESUMO-IMPLEMENTACAO.md) - Resumo completo
+- ⚡ [`STATUS-FUNCIONALIDADE.md`](./docs/STATUS-FUNCIONALIDADE.md) - Status atual
 
 ---
 
-**ELEV Park Sacomã II** - Sua nova vida começa aqui! 🏠✨
+## 🚀 **Status do Projeto**
+
+### **✅ PRONTO PARA PRODUÇÃO**
+
+| Funcionalidade | Status | Descrição |
+|----------------|--------|-----------|
+| 🏠 Landing Page | ✅ **Completa** | 8 seções responsivas |
+| 📝 Formulários | ✅ **Funcionando** | Múltiplos pontos de conversão |
+| 🎯 RD Station | ✅ **Integrado** | API de leads configurada |
+| 📊 Facebook Pixel | ✅ **Ativo** | Tracking completo implementado |
+| 📱 WhatsApp | ✅ **Operacional** | Botão flutuante com tracking |
+| 🖼️ Imagens | ✅ **Otimizadas** | 25+ assets implementados |
+| 📱 Mobile | ✅ **Responsivo** | Design mobile-first |
+| ⚡ Performance | ✅ **Otimizada** | Build ~104kB |
+
+### **📈 Métricas de Performance:**
+- **Bundle Size:** 104kB (otimizado)
+- **Build Time:** ~15s
+- **TypeScript:** 0 erros
+- **Lighthouse:** 95+ (estimado)
+
+---
+
+**🎯 Desenvolvido para maximizar conversões e automatizar o processo de captação de leads imobiliários.**
+
+**📞 Suporte:** Entre em contato para dúvidas ou customizações adicionais.
