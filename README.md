@@ -185,14 +185,14 @@ NEXT_PUBLIC_SITE_URL=https://elevparksacoma.com.br
 ### **Guias Principais:**
 - 📊 [`FACEBOOK-PIXEL-CONFIG.md`](./docs/FACEBOOK-PIXEL-CONFIG.md) - Configuração Facebook Pixel
 - 🎯 [`RDSTATION-CONFIG.md`](./docs/RDSTATION-CONFIG.md) - Integração RD Station CRM
-- 🚀 [`GITHUB-SETUP.md`](./docs/GITHUB-SETUP.md) - Deploy e Git workflow
+- 🚀 [`CHECKLIST-DEPLOY.md`](./docs/CHECKLIST-DEPLOY.md) - Lista completa para deploy
 - 📱 [`CORRECAO-WHATSAPP.md`](./docs/CORRECAO-WHATSAPP.md) - Configuração WhatsApp
 
 ### **Histórico do Projeto:**
 - 🖼️ [`IMPLEMENTACAO-IMAGENS.md`](./docs/IMPLEMENTACAO-IMAGENS.md) - Sistema de imagens
-- 🎨 [`IMPLEMENTACAO-ASSETS.md`](./docs/IMPLEMENTACAO-ASSETS.md) - Assets e otimizações
 - 📋 [`RESUMO-IMPLEMENTACAO.md`](./docs/RESUMO-IMPLEMENTACAO.md) - Resumo completo
 - ⚡ [`STATUS-FUNCIONALIDADE.md`](./docs/STATUS-FUNCIONALIDADE.md) - Status atual
+- 📁 [`PROJETO-ORGANIZADO.md`](./docs/PROJETO-ORGANIZADO.md) - Organização do projeto
 
 ---
 
