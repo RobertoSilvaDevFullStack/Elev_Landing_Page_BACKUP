@@ -8,7 +8,7 @@ const nextConfig = {
     // optimizeCss: true, // Removido temporariamente para evitar erro do critters
   },
   
-  // Configurações de imagem
+  // Configurações de imagem (Vercel otimiza automaticamente)
   images: {
     remotePatterns: [
       {
@@ -98,7 +98,7 @@ const nextConfig = {
   generateEtags: false,
   poweredByHeader: false,
   
-  // Configuração para export estático (se necessário)
+  // Configuração para export estático (desabilitado para Vercel)
   // trailingSlash: true,
   // output: 'export',
 };
