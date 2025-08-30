@@ -39,38 +39,79 @@ function ElevSacomaLanding() {
 
   // Track page sections view
   useEffect(() => {
-    // Track page view
+    // Track page view with enhanced data
     trackEvent('ViewContent');
     trackCustomEvent('Page_View', {
       content_name: 'ELEV Park Sacomã II Landing Page',
-      content_category: 'Real Estate'
+      content_category: 'Real Estate',
+      property_type: 'Apartamento',
+      location: 'Sacomã, São Paulo',
+      page_type: 'Landing Page'
     });
 
-    // Track floor plans section when user scrolls to it
+    // Enhanced scroll tracking for conversion optimization
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.target.id === 'plantas-section') {
-            trackEvent('ViewContent');
-            trackCustomEvent('Floor_Plans_View', {
-              content_name: 'Floor Plans Section',
-              content_category: 'Real Estate'
-            });
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            
+            // Track different sections for Facebook optimization
+            switch (sectionId) {
+              case 'plantas-section':
+                trackEvent('ViewContent');
+                trackCustomEvent('Floor_Plans_View', {
+                  content_name: 'Floor Plans Section',
+                  content_category: 'Real Estate Product Catalog',
+                  event_source_url: window.location.href,
+                  user_engagement: 'high_intent'
+                });
+                break;
+                
+              case 'amenities-section':
+                trackCustomEvent('Amenities_View', {
+                  content_name: 'Amenities Section',
+                  content_category: 'Real Estate Features',
+                  engagement_type: 'lifestyle_interest'
+                });
+                break;
+                
+              case 'location-section':
+                trackCustomEvent('Location_View', {
+                  content_name: 'Location Section',
+                  content_category: 'Real Estate Location',
+                  engagement_type: 'location_interest'
+                });
+                break;
+                
+              case 'contact-section':
+                trackEvent('InitiateCheckout'); // High-intent signal
+                trackCustomEvent('Contact_Section_View', {
+                  content_name: 'Contact Form Section',
+                  content_category: 'Real Estate Contact',
+                  user_engagement: 'very_high_intent',
+                  conversion_likelihood: 'high'
+                });
+                break;
+            }
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 } // Trigger when 30% visible
     );
 
-    const plantasSection = document.getElementById('plantas-section');
-    if (plantasSection) {
-      observer.observe(plantasSection);
-    }
+    // Observe multiple sections
+    const sections = ['plantas-section', 'amenities-section', 'location-section', 'contact-section'];
+    sections.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (section) observer.observe(section);
+    });
 
     return () => {
-      if (plantasSection) {
-        observer.unobserve(plantasSection);
-      }
+      sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) observer.unobserve(section);
+      });
     };
   }, [trackEvent, trackCustomEvent]);
 
@@ -82,7 +123,7 @@ function ElevSacomaLanding() {
       if (document.title !== 'ELEV Park Sacomã II - Apartamentos 1 e 2 Dorm com Suíte | Entrada FGTS') {
         document.title = 'ELEV Park Sacomã II - Apartamentos 1 e 2 Dorm com Suíte | Entrada FGTS';
       }
-      
+
       // Verificar se meta tags já existem antes de criar
       if (!document.querySelector('meta[name="description"]')) {
         const metaTags = [
@@ -99,7 +140,7 @@ function ElevSacomaLanding() {
           { name: 'twitter:title', content: 'ELEV Park Sacomã II - Apartamentos com Entrada FGTS' },
           { name: 'twitter:description', content: 'Apartamentos 1 e 2 dormitórios com suíte no Sacomã. Entrada com FGTS, 3 min do metrô.' }
         ];
-        
+
         metaTags.forEach(tag => {
           const metaTag = document.createElement('meta');
           if (tag.name) metaTag.name = tag.name;
@@ -122,13 +163,13 @@ function ElevSacomaLanding() {
     phone: '',
     interest: 'primeira-compra'
   });
-  
+
   // Estados do vídeo
   const [showVideo, setShowVideo] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  
-  
+
+
   // Rotate testimonials with fixed interval
   useEffect(() => {
     const interval = setInterval(() => {
@@ -140,14 +181,38 @@ function ElevSacomaLanding() {
   // Handle form submission
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    // Facebook Pixel tracking
+
+    // Facebook Pixel - Track Lead Generation Event (Standard Event)
     if (typeof window !== 'undefined' && window.fbq) {
+      // Standard Lead Event - Principal para campanhas de conversão
       window.fbq('track', 'Lead', {
-        content_name: 'ELEV Park Sacomã II',
+        content_name: 'ELEV Park Sacomã II Lead Form',
         content_category: 'Real Estate',
+        content_type: 'product',
+        value: 250000, // Valor médio dos apartamentos em BRL
+        currency: 'BRL',
+        predicted_ltv: 250000,
+        status: 'completed'
+      });
+
+      // Complete Registration Event - Para funil de conversão
+      window.fbq('track', 'CompleteRegistration', {
+        content_name: 'ELEV Park Sacomã II Registration',
+        content_category: 'Real Estate Lead',
         value: 1,
-        currency: 'BRL'
+        currency: 'BRL',
+        status: 'completed'
+      });
+
+      // Custom Event para segmentação avançada
+      window.fbq('trackCustom', 'RealEstate_LeadSubmission', {
+        property_name: 'ELEV Park Sacomã II',
+        property_type: 'Apartamento',
+        property_location: 'Sacomã, São Paulo',
+        interest_type: formData.interest,
+        lead_source: 'Landing Page',
+        campaign_type: 'Lead Generation',
+        timestamp: new Date().toISOString()
       });
     }
 
@@ -157,7 +222,10 @@ function ElevSacomaLanding() {
       name: formData.name,
       mobile_phone: formData.phone,
       cf_interest_type: formData.interest,
-      cf_source: 'Landing Page ELEV Sacomã'
+      cf_source: 'Landing Page ELEV Sacomã',
+      cf_property_value: '250000',
+      cf_campaign_source: 'Facebook Ads',
+      cf_lead_quality: 'Hot Lead'
     };
 
     // Send lead to RD Station
@@ -172,24 +240,51 @@ function ElevSacomaLanding() {
 
       if (rdResponse.ok) {
         console.log('Lead enviado para RD Station com sucesso');
+        
+        // Track successful CRM integration
+        if (typeof window !== 'undefined' && window.fbq) {
+          window.fbq('trackCustom', 'CRM_Integration_Success', {
+            integration_type: 'RD Station',
+            lead_email: formData.email,
+            status: 'success'
+          });
+        }
       } else {
         console.error('Erro ao enviar lead para RD Station');
+        
+        // Track CRM integration failure
+        if (typeof window !== 'undefined' && window.fbq) {
+          window.fbq('trackCustom', 'CRM_Integration_Error', {
+            integration_type: 'RD Station',
+            error_type: 'API Error',
+            status: 'failed'
+          });
+        }
       }
     } catch (error) {
       console.error('Erro na integração RD Station:', error);
+      
+      // Track network error
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('trackCustom', 'CRM_Integration_Error', {
+          integration_type: 'RD Station',
+          error_type: 'Network Error',
+          status: 'failed'
+        });
+      }
     }
-    
-    // Track form submission event
+
+    // Track form submission event (mantendo compatibilidade)
     trackEvent('Lead');
     trackCustomEvent('Form_Submit', {
       content_name: 'ELEV Park Sacomã II Lead Form',
       content_category: 'Real Estate Lead',
       value: 1
     });
-    
+
     // Show success message instead of automatic redirect
     alert('✅ Obrigado! Seus dados foram enviados com sucesso. Nossa equipe entrará em contato em breve!');
-    
+
     // Reset form
     setFormData({
       name: '',
@@ -199,24 +294,106 @@ function ElevSacomaLanding() {
     });
   }, [formData, trackEvent, trackCustomEvent, setFormData]);
 
-  // WhatsApp click tracking function
+  // WhatsApp click tracking function with enhanced conversion tracking
   const handleWhatsAppClick = useCallback(() => {
+    // Standard Contact event
     trackEvent('Contact');
+    
+    // Enhanced WhatsApp tracking for Facebook Ads optimization
+    if (typeof window !== 'undefined' && window.fbq) {
+      // Track as lead (potential conversion)
+      window.fbq('track', 'Lead', {
+        content_name: 'ELEV Park Sacomã II WhatsApp Contact',
+        content_category: 'Real Estate Contact',
+        value: 1,
+        currency: 'BRL',
+        predicted_ltv: 250000
+      });
+
+      // Custom event for WhatsApp engagement
+      window.fbq('trackCustom', 'WhatsApp_Contact_Intent', {
+        property_name: 'ELEV Park Sacomã II',
+        contact_method: 'WhatsApp',
+        user_engagement: 'high_intent',
+        conversion_likelihood: 'high',
+        timestamp: new Date().toISOString()
+      });
+    }
+
     trackCustomEvent('WhatsApp_Click', {
       content_name: 'ELEV Park Sacomã II',
-      content_category: 'Real Estate Contact'
+      content_category: 'Real Estate Contact',
+      contact_method: 'WhatsApp'
     });
   }, [trackEvent, trackCustomEvent]);
 
-  // Function to open WhatsApp with personalized message
+  // Function to open WhatsApp with personalized message and enhanced tracking
   const openWhatsApp = useCallback((customMessage?: string) => {
     const defaultMessage = 'Olá! Gostaria de saber mais sobre o ELEV Park Sacomã II.';
     const message = customMessage || defaultMessage;
     const whatsappMessage = encodeURIComponent(message);
-    
+
     handleWhatsAppClick();
     window.open(`https://wa.me/5511960225753?text=${whatsappMessage}`, '_blank');
   }, [handleWhatsAppClick]);
+
+  // Floor plan view tracking function
+  const trackFloorPlanView = useCallback((planType: string) => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      // Track as high-intent ViewContent
+      window.fbq('track', 'ViewContent', {
+        content_name: `Floor Plan ${planType} - ELEV Park Sacomã II`,
+        content_category: 'Real Estate Floor Plan',
+        content_type: 'product',
+        value: planType === '37m2' ? 270000 : planType === '34m2' ? 250000 : 220000,
+        currency: 'BRL',
+        custom_data: {
+          apartment_type: planType,
+          user_engagement: 'very_high_intent'
+        }
+      });
+
+      // Custom event for floor plan engagement
+      window.fbq('trackCustom', 'FloorPlan_DetailView', {
+        apartment_type: planType,
+        property_name: 'ELEV Park Sacomã II',
+        engagement_type: 'detailed_view',
+        conversion_likelihood: 'very_high',
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // Track with custom hook
+    trackCustomEvent('Floor_Plan_Detail_View', {
+      content_name: `Floor Plan ${planType}`,
+      apartment_type: planType,
+      user_engagement: 'very_high_intent'
+    });
+  }, [trackCustomEvent]);
+
+  // Gallery image view tracking
+  const trackGalleryView = useCallback((imageType: string) => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('trackCustom', 'Gallery_ImageView', {
+        image_type: imageType,
+        property_name: 'ELEV Park Sacomã II',
+        engagement_type: 'visual_interest',
+        user_engagement: 'high_intent'
+      });
+    }
+  }, []);
+
+  // Amenity interest tracking
+  const trackAmenityInterest = useCallback((amenityType: string) => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('trackCustom', 'Amenity_Interest', {
+        amenity_type: amenityType,
+        property_name: 'ELEV Park Sacomã II',
+        engagement_type: 'lifestyle_interest',
+        user_engagement: 'medium_intent'
+      });
+    }
+  }, []);
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData(prev => ({
@@ -281,7 +458,7 @@ function ElevSacomaLanding() {
   return (
     <div className="min-h-screen bg-white">
       {/* Facebook Pixel and Meta Tags would go in document head */}
-      
+
       {/* WhatsApp Floating Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <div className="relative">
@@ -313,10 +490,10 @@ function ElevSacomaLanding() {
       {/* Hero Section */}
       <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        
+
         <div className="relative container mx-auto px-4 pt-20 pb-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen">
-            
+
             {/* Left Column - Content */}
             <div className="space-y-8">
               <div className="space-y-4">
@@ -324,16 +501,16 @@ function ElevSacomaLanding() {
                   <MapPin size={20} />
                   <span>3 minutos da Estação Sacomã</span>
                 </div>
-                
+
                 <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
                   Sua <span className="text-orange-400">Nova Vida</span><br />
                   Começa Aqui
                 </h1>
-                
+
                 <p className="text-xl lg:text-2xl text-blue-100">
                   Apartamentos de 1 e 2 dormitórios no coração do Sacomã
                 </p>
-                
+
                 <div className="flex flex-wrap gap-4 text-sm">
                   <div className="bg-green-600 px-4 py-2 rounded-full font-semibold">
                     ✓ Sem Entrada
@@ -349,21 +526,21 @@ function ElevSacomaLanding() {
 
               {/* Three CTA Buttons for Different Audiences */}
               <div className="space-y-4">
-                <button 
+                <button
                   onClick={scrollToForm}
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105 shadow-lg"
                 >
                   🏠 PRIMEIRA CASA PRÓPRIA - Cadastre-se
                 </button>
-                
-                <button 
+
+                <button
                   onClick={scrollToInvestment}
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105 shadow-lg"
                 >
                   📈 INVESTIMENTO GARANTIDO - Saiba Mais
                 </button>
-                
-                <button 
+
+                <button
                   onClick={scrollToSuite}
                   className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105 shadow-lg"
                 >
@@ -538,7 +715,7 @@ function ElevSacomaLanding() {
             <div className="space-y-8">
               <div className="bg-white p-8 rounded-2xl shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">Por que é o momento ideal?</h3>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-start space-x-4">
                     <div className="bg-green-100 p-2 rounded-full">
@@ -549,7 +726,7 @@ function ElevSacomaLanding() {
                       <p className="text-gray-600 text-sm">Transforme o valor do aluguel na parcela da sua casa própria</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <div className="bg-green-100 p-2 rounded-full">
                       <CheckCircle className="text-green-600" size={20} />
@@ -559,7 +736,7 @@ function ElevSacomaLanding() {
                       <p className="text-gray-600 text-sm">Não precisa ter dinheiro guardado para começar</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <div className="bg-green-100 p-2 rounded-full">
                       <CheckCircle className="text-green-600" size={20} />
@@ -569,7 +746,7 @@ function ElevSacomaLanding() {
                       <p className="text-gray-600 text-sm">Perto do trabalho, faculdade e vida noturna</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <div className="bg-green-100 p-2 rounded-full">
                       <CheckCircle className="text-green-600" size={20} />
@@ -666,7 +843,7 @@ function ElevSacomaLanding() {
                       <p>✓ Financiamento até 35 anos</p>
                     </div>
                   </div>
-                  
+
                   {/* Right Column - Logo Minha Casa Minha Vida (2/5 width) */}
                   <div className="md:col-span-2 flex justify-center items-center">
                     <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 flex items-center justify-center">
@@ -696,7 +873,7 @@ function ElevSacomaLanding() {
             <div className="space-y-8">
               <div className="bg-white p-8 rounded-2xl shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">🏠 Apartamento 37m² com Suíte</h3>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-start space-x-4">
                     <div className="bg-purple-100 p-2 rounded-full">
@@ -707,7 +884,7 @@ function ElevSacomaLanding() {
                       <p className="text-gray-600 text-sm">Quarto do casal com banheiro privativo e closet</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <div className="bg-purple-100 p-2 rounded-full">
                       <CheckCircle className="text-purple-600" size={20} />
@@ -717,7 +894,7 @@ function ElevSacomaLanding() {
                       <p className="text-gray-600 text-sm">Espaço para churrasqueira e área de convivência</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <div className="bg-purple-100 p-2 rounded-full">
                       <CheckCircle className="text-purple-600" size={20} />
@@ -727,7 +904,7 @@ function ElevSacomaLanding() {
                       <p className="text-gray-600 text-sm">Cada metro quadrado pensado para máximo aproveitamento</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <div className="bg-purple-100 p-2 rounded-full">
                       <CheckCircle className="text-purple-600" size={20} />
@@ -759,7 +936,7 @@ function ElevSacomaLanding() {
             <div className="space-y-6" id="plantas-section">
               {/* Carrossel de Plantas - MCMV */}
               <ImageManager.FloorPlanCarousel />
-              
+
               <div className="bg-white p-8 rounded-2xl shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
                   🎯 Quero Ver a Planta da Suíte
@@ -826,7 +1003,7 @@ function ElevSacomaLanding() {
                       <p>✓ Tomadas USB e pontos de internet</p>
                     </div>
                   </div>
-                  
+
                   {/* Right Column - Faixa 4 MCMV Logo (2/5 width) */}
                   <div className="md:col-span-2 flex justify-center items-center">
                     <div className="w-40 h-40 md:w-52 md:h-52 lg:w-64 lg:h-64 flex items-center justify-center">
@@ -862,7 +1039,7 @@ function ElevSacomaLanding() {
               <p className="text-lg mb-6 opacity-90">
                 Receba as plantas detalhadas e conheça todos os diferenciais dos nossos apartamentos
               </p>
-              <button 
+              <button
                 onClick={scrollToForm}
                 className="bg-white text-blue-600 font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg"
               >
@@ -894,7 +1071,7 @@ function ElevSacomaLanding() {
           </div>
 
           <div className="text-center mt-12">
-            <button 
+            <button
               onClick={scrollToForm}
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-12 rounded-lg text-xl transition-all duration-300 hover:scale-105 shadow-lg"
             >
@@ -923,11 +1100,11 @@ function ElevSacomaLanding() {
                   <Star key={i} className="text-yellow-400 fill-current" size={24} />
                 ))}
               </div>
-              
+
               <blockquote className="text-xl text-gray-800 text-center mb-6 italic">
                 &ldquo;{testimonials[currentTestimonial].text}&rdquo;
               </blockquote>
-              
+
               <div className="text-center">
                 <p className="font-bold text-gray-800">{testimonials[currentTestimonial].name}</p>
                 <p className="text-gray-600">{testimonials[currentTestimonial].unit}</p>
@@ -939,9 +1116,8 @@ function ElevSacomaLanding() {
                 <button
                   key={index}
                   onClick={() => changeTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentTestimonial ? 'bg-blue-500' : 'bg-gray-300'
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentTestimonial ? 'bg-blue-500' : 'bg-gray-300'
+                    }`}
                 />
               ))}
             </div>
@@ -960,7 +1136,7 @@ function ElevSacomaLanding() {
               <p className="text-xl text-blue-100 mb-8">
                 A Trisul é uma das maiores construtoras do Brasil, com mais de 60 mil unidades entregues e empresa de capital aberto na B3.
               </p>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <CheckCircle className="text-green-400" size={24} />
@@ -1048,7 +1224,7 @@ function ElevSacomaLanding() {
                     required
                   />
                 </div>
-                
+
                 <div className="grid md:grid-cols-2 gap-4">
                   <input
                     type="tel"
