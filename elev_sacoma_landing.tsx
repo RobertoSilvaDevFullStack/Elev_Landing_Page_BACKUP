@@ -178,9 +178,34 @@ function ElevSacomaLanding() {
     return () => clearInterval(interval);
   }, []); // Array vazio para evitar re-renders
 
+  // Enhanced Matching - Hash function para privacy compliance
+  const hashData = useCallback(async (data: string): Promise<string> => {
+    if (!data || typeof window === 'undefined' || !window.crypto?.subtle) {
+      return '';
+    }
+    
+    try {
+      const encoder = new TextEncoder();
+      const dataBuffer = encoder.encode(data.toLowerCase().trim());
+      const hashBuffer = await window.crypto.subtle.digest('SHA-256', dataBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch (error) {
+      console.warn('Hash generation failed:', error);
+      return '';
+    }
+  }, []);
+
   // Handle form submission
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Prepare Enhanced Matching data for Facebook Pixel
+    const enhancedMatchData = {
+      em: await hashData(formData.email), // Email hasheado
+      ph: await hashData(formData.phone.replace(/\D/g, '')), // Telefone hasheado (só números)
+      fn: await hashData(formData.name.split(' ')[0]) // Primeiro nome hasheado
+    };
 
     // Facebook Pixel - Track Lead Generation Event (Standard Event)
     if (typeof window !== 'undefined' && window.fbq) {
@@ -193,7 +218,7 @@ function ElevSacomaLanding() {
         currency: 'BRL',
         predicted_ltv: 250000,
         status: 'completed'
-      });
+      }, enhancedMatchData); // Enhanced Matching para melhor precision
 
       // Complete Registration Event - Para funil de conversão
       window.fbq('track', 'CompleteRegistration', {
@@ -292,7 +317,7 @@ function ElevSacomaLanding() {
       phone: '',
       interest: '1 dormitório'
     });
-  }, [formData, trackEvent, trackCustomEvent, setFormData]);
+  }, [formData, trackEvent, trackCustomEvent, setFormData, hashData]);
 
   // WhatsApp click tracking function with enhanced conversion tracking
   const handleWhatsAppClick = useCallback(() => {
@@ -1288,8 +1313,8 @@ function ElevSacomaLanding() {
           <div className="border-t border-gray-800 mt-8 pt-8">
             <div className="grid md:grid-cols-2 gap-4 items-center">
               <div className="text-sm text-gray-400">
-                <p>© 2025 Trisul - Todos os direitos reservados</p>
-                <p>CRECI: J20186 - Incorporação: Matrícula 270.895</p>
+                <p>© 2025 - Todos os direitos reservados</p>
+                <p>CRECI: 261788F</p>
               </div>
               <div className="text-sm text-gray-400 md:text-right">
                 <p><a href="https://github.com/RobertoSilvaDevFullStack/RobertoSilvaDevFullStack" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">Desenvolvedor: <strong>Roberto Silva</strong></a></p>
