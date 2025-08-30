@@ -337,64 +337,6 @@ function ElevSacomaLanding() {
     window.open(`https://wa.me/5511960225753?text=${whatsappMessage}`, '_blank');
   }, [handleWhatsAppClick]);
 
-  // Floor plan view tracking function
-  const trackFloorPlanView = useCallback((planType: string) => {
-    if (typeof window !== 'undefined' && window.fbq) {
-      // Track as high-intent ViewContent
-      window.fbq('track', 'ViewContent', {
-        content_name: `Floor Plan ${planType} - ELEV Park Sacomã II`,
-        content_category: 'Real Estate Floor Plan',
-        content_type: 'product',
-        value: planType === '37m2' ? 270000 : planType === '34m2' ? 250000 : 220000,
-        currency: 'BRL',
-        custom_data: {
-          apartment_type: planType,
-          user_engagement: 'very_high_intent'
-        }
-      });
-
-      // Custom event for floor plan engagement
-      window.fbq('trackCustom', 'FloorPlan_DetailView', {
-        apartment_type: planType,
-        property_name: 'ELEV Park Sacomã II',
-        engagement_type: 'detailed_view',
-        conversion_likelihood: 'very_high',
-        timestamp: new Date().toISOString()
-      });
-    }
-
-    // Track with custom hook
-    trackCustomEvent('Floor_Plan_Detail_View', {
-      content_name: `Floor Plan ${planType}`,
-      apartment_type: planType,
-      user_engagement: 'very_high_intent'
-    });
-  }, [trackCustomEvent]);
-
-  // Gallery image view tracking
-  const trackGalleryView = useCallback((imageType: string) => {
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('trackCustom', 'Gallery_ImageView', {
-        image_type: imageType,
-        property_name: 'ELEV Park Sacomã II',
-        engagement_type: 'visual_interest',
-        user_engagement: 'high_intent'
-      });
-    }
-  }, []);
-
-  // Amenity interest tracking
-  const trackAmenityInterest = useCallback((amenityType: string) => {
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('trackCustom', 'Amenity_Interest', {
-        amenity_type: amenityType,
-        property_name: 'ELEV Park Sacomã II',
-        engagement_type: 'lifestyle_interest',
-        user_engagement: 'medium_intent'
-      });
-    }
-  }, []);
-
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData(prev => ({
       ...prev,
