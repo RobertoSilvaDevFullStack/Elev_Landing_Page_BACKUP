@@ -12,7 +12,12 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>ELEV Park Sacomã II - Apartamentos MCMV</title>
         <meta name="description" content="Apartamentos a 3 min da Estação Sacomã com entrada via FGTS. Plantas de 25m² a 37m² com suíte. Financiamento facilitado Minha Casa Minha Vida." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="theme-color" content="#3b82f6" />
         <link rel="icon" href="/favicon.ico" />
         
         {/* Open Graph / Facebook */}

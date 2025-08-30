@@ -121,6 +121,62 @@ a {
   @apply bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
 }
 
+/* Otimizações para Mobile e Touch */
+button, a, [role="button"], input[type="submit"], .touchable {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Safe Area para iOS com notch */
+.safe-area-top {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+
+.safe-area-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+.safe-area-left {
+  padding-left: max(1rem, env(safe-area-inset-left));
+}
+
+.safe-area-right {
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+/* Smooth scrolling para melhor UX mobile */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Otimização de performance para animações mobile */
+.hardware-accelerated {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Efeitos de hover apenas em dispositivos que suportam hover */
+@media (hover: hover) and (pointer: fine) {
+  .hover-only:hover {
+    /* Efeitos de hover aqui */
+  }
+}
+
+/* Estilos específicos para touch devices */
+@media (hover: none) and (pointer: coarse) {
+  /* Aumentar área de toque em dispositivos touch */
+  button, a[role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
 /* Efeitos de hover para cards */
 .card-hover {
   @apply transition-all duration-300 hover:shadow-xl hover:scale-105;
