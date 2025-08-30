@@ -191,11 +191,11 @@ export const FloorPlanCarousel = ({ className = "" }: { className?: string }) =>
     }
   ];
 
-  // Auto-advance carousel every 3 seconds
+  // Auto-advance carousel every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPlan((prev) => (prev + 1) % floorPlans.length);
-    }, 5000);
+    }, 5000); // 5 segundos de transição
 
     return () => clearInterval(interval);
   }, [floorPlans.length]);
@@ -217,13 +217,7 @@ export const FloorPlanCarousel = ({ className = "" }: { className?: string }) =>
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
           />
           
-          {/* Legend Overlay */}
-          <div className="absolute bottom-4 left-4 right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-lg shadow-lg">
-            <h3 className="font-bold text-lg mb-1">{currentFloorPlan.title}</h3>
-            <p className="text-sm opacity-90">{currentFloorPlan.legend}</p>
-          </div>
-
-          {/* Dots Indicator */}
+          {/* Dots Indicator - Posicionado no canto superior direito da imagem */}
           <div className="absolute top-4 right-4 flex space-x-2">
             {floorPlans.map((_, index) => (
               <button
@@ -237,6 +231,12 @@ export const FloorPlanCarousel = ({ className = "" }: { className?: string }) =>
               />
             ))}
           </div>
+        </div>
+        
+        {/* Legend - Agora posicionada ABAIXO da imagem */}
+        <div className="mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-lg shadow-lg">
+          <h3 className="font-bold text-lg mb-1">{currentFloorPlan.title}</h3>
+          <p className="text-sm opacity-90">{currentFloorPlan.legend}</p>
         </div>
       </div>
     </div>
