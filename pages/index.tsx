@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>ELEV Park Sacomã II - Apartamentos com Entrada FGTS | Sua Nova Vida Começa Aqui</title>
+        <title>Apartamentos com Entrada FGTS | Sua Nova Vida Começa Aqui</title>
         <meta name="description" content="Apartamentos 1 e 2 dormitórios no Sacomã com entrada FGTS. Localização privilegiada, lazer completo e condições especiais. Financiamento em até 35 anos." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
