@@ -3,9 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
-  // Otimizações de performance
+  // Otimizações de performance (sem optimizeCss para evitar erro critters)
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Desabilitado temporariamente
   },
   
   // Configurações de imagem otimizadas para Vercel
