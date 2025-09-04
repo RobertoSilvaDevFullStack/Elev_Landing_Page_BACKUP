@@ -76,7 +76,6 @@ const nextConfig = {
   // Configurações específicas para Vercel
   env: {
     NEXT_PUBLIC_FACEBOOK_PIXEL_ID: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID,
-    NEXT_PUBLIC_RDSTATION_TOKEN: process.env.NEXT_PUBLIC_RDSTATION_TOKEN,
     NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
   },
 };

@@ -1,19 +1,14 @@
-# 🗄️ **Setup do Banco de Dados MySQL - Hostinger**
+# 🗄️ **Setup do Banco de Dados MySQL - Versão Simplificada**
 
 ## 📋 **Visão Geral**
-Este guia configura um banco MySQL na Hostinger para armazenar leads da landing page como **backup seguro**, garantindo que nenhum lead seja perdido mesmo se a API do RD Station falhar.
+Este guia configura um banco MySQL na Hostinger para armazenar leads da landing page diretamente no banco de dados, sem integrações externas.
 
-## 🎯 **Fluxo de Leads (Nova Arquitetura)**
+## 🎯 **Fluxo Simplificado**
 ```
-Usuário Preenche Formulário
-           ↓
-    Salva no MySQL ✅ (SEMPRE)
-           ↓
-    Tenta enviar para RD Station
-           ↓
-     ✅ Sucesso → Lead duplicado (segurança)
-     ❌ Falha → Lead seguro no MySQL
+Formulário → MySQL (Salvamento direto)
 ```
+
+**RESULTADO**: **Sistema simples e confiável**
 
 ---
 
@@ -94,42 +89,30 @@ DB_USER=elev_user
 DB_PASSWORD=[SUA_SENHA_AQUI]
 DB_PORT=3306
 
-# Existing RD Station Config (manter)
-RD_STATION_TOKEN=68b11b29dd35dd0017eea0b3
-RD_STATION_IDENTIFIER=elev-sacoma-landing
+# Facebook Pixel (manter)
+NEXT_PUBLIC_FACEBOOK_PIXEL_ID=669854672792093
 ```
 
 ---
 
-## 📈 **4. Vantagens da Nova Arquitetura**
+## 📈 **4. Vantagens da Arquitetura Simplificada**
 
 ### **✅ Benefícios**
-1. **Zero Perda de Leads**: Todo lead é salvo localmente
-2. **Backup Automático**: Dados seguros mesmo com falha de API
-3. **Relatórios Detalhados**: Analytics completo no phpMyAdmin
-4. **Auditoria**: Log de todos os erros e sucessos
+1. **Simplicidade**: Sistema direto, sem dependências externas
+2. **Confiabilidade**: Não depende de APIs de terceiros
+3. **Controle total**: Todos os dados no seu banco
+4. **Relatórios**: Analytics completo no phpMyAdmin
 5. **LGPD Compliance**: Dados armazenados no Brasil
 
 ### **📊 Métricas Disponíveis**
 - Total de leads por período
-- Taxa de sucesso RD Station
 - Origem dos leads (mobile/desktop)
 - Tipos de interesse mais procurados
 - Horários de maior conversão
 
 ---
 
-## 🚀 **5. Próximos Passos**
-
-1. **Criar banco na Hostinger** ✅
-2. **Instalar dependência MySQL** no projeto
-3. **Criar API de backup** `/api/save-lead-backup`
-4. **Modificar formulário** para usar dupla gravação
-5. **Criar dashboard** de leads no phpMyAdmin
-
----
-
-## 🔍 **6. Queries Úteis para Relatórios**
+## 🔍 **5. Queries Úteis para Relatórios**
 
 ### **Total de Leads por Dia**
 ```sql
@@ -137,16 +120,6 @@ SELECT DATE(created_at) as data, COUNT(*) as total_leads
 FROM leads 
 GROUP BY DATE(created_at) 
 ORDER BY data DESC;
-```
-
-### **Taxa de Sucesso RD Station**
-```sql
-SELECT 
-    rd_station_status,
-    COUNT(*) as quantidade,
-    ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM leads), 2) as porcentagem
-FROM leads 
-GROUP BY rd_station_status;
 ```
 
 ### **Leads por Tipo de Interesse**
@@ -157,6 +130,28 @@ GROUP BY interest_type
 ORDER BY total DESC;
 ```
 
+### **Leads por Horário**
+```sql
+SELECT HOUR(created_at) as hora, COUNT(*) as total
+FROM leads 
+GROUP BY HOUR(created_at) 
+ORDER BY hora;
+```
+
 ---
 
-**⚠️ IMPORTANTE**: Após configurar o banco, implementaremos a API de backup para garantir que os leads sejam sempre salvos, independente do status do RD Station.
+## 🚀 **6. APIs Disponíveis**
+
+### **Salvar Lead**
+- **Endpoint**: `/api/lead-backup`
+- **Método**: POST
+- **Função**: Salva lead diretamente no MySQL
+
+### **Dashboard**
+- **Endpoint**: `/api/leads-dashboard`
+- **Método**: GET
+- **Função**: Retorna estatísticas e leads recentes
+
+---
+
+**⚡ Sistema simplificado e direto ao ponto: leads salvos com segurança no MySQL!**

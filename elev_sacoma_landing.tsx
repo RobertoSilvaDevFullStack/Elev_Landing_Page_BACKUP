@@ -253,9 +253,9 @@ function ElevSacomaLanding() {
       cf_lead_quality: 'Hot Lead'
     };
 
-    // Send lead to RD Station
+    // Send lead to database
     try {
-      const rdResponse = await fetch('/api/rdstation-lead', {
+      const leadResponse = await fetch('/api/lead-backup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -263,36 +263,36 @@ function ElevSacomaLanding() {
         body: JSON.stringify(rdData)
       });
 
-      if (rdResponse.ok) {
-        console.log('Lead enviado para RD Station com sucesso');
+      if (leadResponse.ok) {
+        console.log('Lead salvo no banco de dados com sucesso');
         
-        // Track successful CRM integration
+        // Track successful lead save
         if (typeof window !== 'undefined' && window.fbq) {
-          window.fbq('trackCustom', 'CRM_Integration_Success', {
-            integration_type: 'RD Station',
+          window.fbq('trackCustom', 'Lead_Save_Success', {
+            integration_type: 'MySQL Database',
             lead_email: formData.email,
             status: 'success'
           });
         }
       } else {
-        console.error('Erro ao enviar lead para RD Station');
+        console.error('Erro ao salvar lead no banco de dados');
         
-        // Track CRM integration failure
+        // Track lead save failure
         if (typeof window !== 'undefined' && window.fbq) {
-          window.fbq('trackCustom', 'CRM_Integration_Error', {
-            integration_type: 'RD Station',
+          window.fbq('trackCustom', 'Lead_Save_Error', {
+            integration_type: 'MySQL Database',
             error_type: 'API Error',
             status: 'failed'
           });
         }
       }
     } catch (error) {
-      console.error('Erro na integração RD Station:', error);
+      console.error('Erro ao salvar lead:', error);
       
       // Track network error
       if (typeof window !== 'undefined' && window.fbq) {
-        window.fbq('trackCustom', 'CRM_Integration_Error', {
-          integration_type: 'RD Station',
+        window.fbq('trackCustom', 'Lead_Save_Error', {
+          integration_type: 'MySQL Database',
           error_type: 'Network Error',
           status: 'failed'
         });

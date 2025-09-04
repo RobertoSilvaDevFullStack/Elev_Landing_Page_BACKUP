@@ -53,7 +53,6 @@ export default async function handler(
         phone,
         interest_type,
         source,
-        rd_station_status,
         created_at,
         ip_address
       FROM leads 
@@ -65,9 +64,6 @@ export default async function handler(
     const statsQuery = `
       SELECT 
         COUNT(*) as total_leads,
-        SUM(CASE WHEN rd_station_status = 'success' THEN 1 ELSE 0 END) as rd_success,
-        SUM(CASE WHEN rd_station_status = 'failed' THEN 1 ELSE 0 END) as rd_failed,
-        SUM(CASE WHEN rd_station_status = 'pending' THEN 1 ELSE 0 END) as rd_pending,
         DATE(MAX(created_at)) as last_lead_date
       FROM leads
     `;
@@ -76,8 +72,7 @@ export default async function handler(
     const dailyQuery = `
       SELECT 
         DATE(created_at) as data,
-        COUNT(*) as total,
-        SUM(CASE WHEN rd_station_status = 'success' THEN 1 ELSE 0 END) as sucessos
+        COUNT(*) as total
       FROM leads 
       WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
       GROUP BY DATE(created_at)
@@ -105,18 +100,10 @@ export default async function handler(
     const leads = leadsResult as unknown[];
     const stats = (statsResult as unknown[])[0] as {
       total_leads: number;
-      rd_success: number;
-      rd_failed: number;
-      rd_pending: number;
       last_lead_date: string;
     };
     const daily = dailyResult as unknown[];
     const interests = interestResult as unknown[];
-
-    // Calcular taxa de sucesso
-    const successRate = stats.total_leads > 0 
-      ? ((stats.rd_success / stats.total_leads) * 100).toFixed(1)
-      : '0';
 
     const response = {
       success: true,
@@ -126,12 +113,6 @@ export default async function handler(
         leads: leads,
         statistics: {
           total_leads: stats.total_leads,
-          rd_station: {
-            success: stats.rd_success,
-            failed: stats.rd_failed,
-            pending: stats.rd_pending,
-            success_rate: `${successRate}%`
-          },
           last_lead_date: stats.last_lead_date
         },
         daily_leads: daily,

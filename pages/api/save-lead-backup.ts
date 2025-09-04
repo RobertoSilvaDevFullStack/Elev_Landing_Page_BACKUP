@@ -51,8 +51,8 @@ async function saveLeadToMySQL(leadData: LeadBackupData): Promise<number> {
     const query = `
       INSERT INTO leads (
         name, email, phone, interest_type, source, campaign, 
-        ip_address, user_agent, rd_station_status, created_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', NOW())
+        ip_address, user_agent, created_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
     `;
     
     const values = [
@@ -70,31 +70,6 @@ async function saveLeadToMySQL(leadData: LeadBackupData): Promise<number> {
     
     console.log('Lead salvo no MySQL:', result.insertId);
     return result.insertId;
-    
-  } finally {
-    await connection.end();
-  }
-}
-
-// Função para atualizar status do RD Station
-export async function updateRDStationStatus(
-  leadId: number, 
-  status: 'success' | 'failed', 
-  response?: unknown
-): Promise<void> {
-  const connection = await createConnection();
-  
-  try {
-    const query = `
-      UPDATE leads 
-      SET rd_station_status = ?, rd_station_response = ?, updated_at = NOW()
-      WHERE id = ?
-    `;
-    
-    const responseText = response ? JSON.stringify(response) : null;
-    await connection.execute(query, [status, responseText, leadId]);
-    
-    console.log(`Lead ${leadId} atualizado: status ${status}`);
     
   } finally {
     await connection.end();
