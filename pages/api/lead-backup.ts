@@ -1,8 +1,9 @@
 // pages/api/lead-backup.ts
-// API Route para salvar leads no MySQL
+// API Route para salvar leads no MySQL e enviar notificação por email
 
 import { NextApiRequest, NextApiResponse } from 'next';
 import { saveLeadToMySQL, saveErrorLog } from './save-lead-backup';
+import { sendNewLeadNotification } from '../../lib/emailService';
 
 interface LeadData {
   email: string;
@@ -54,11 +55,30 @@ export default async function handler(
       leadId = await saveLeadToMySQL(backupData);
       console.log(`✅ Lead ${leadId} salvo no MySQL com sucesso`);
 
+      // ✅ ENVIAR NOTIFICAÇÃO POR EMAIL
+      try {
+        const leadForEmail = {
+          id: leadId,
+          name: leadData.name,
+          email: leadData.email,
+          phone: leadData.mobile_phone,
+          interest_type: leadData.cf_interest_type,
+          created_at: new Date().toISOString()
+        };
+
+        const emailSent = await sendNewLeadNotification(leadForEmail);
+        console.log(`${emailSent ? '✅' : '❌'} Email de notificação ${emailSent ? 'enviado' : 'falhou'} para lead ${leadId}`);
+      } catch (emailError) {
+        console.error('⚠️ Erro ao enviar email (não crítico):', emailError);
+        // Não falha a requisição se o email não funcionar
+      }
+
       return res.status(200).json({ 
         success: true, 
         message: 'Lead salvo com sucesso no banco de dados',
         backup_saved: true,
-        lead_id: leadId
+        lead_id: leadId,
+        email_notification: 'attempted' // Indica que tentou enviar email
       });
 
     } catch (mysqlError) {

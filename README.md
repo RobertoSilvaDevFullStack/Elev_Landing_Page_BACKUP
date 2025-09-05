@@ -64,43 +64,58 @@
 - **Tailwind CSS** - Styling utility-first moderno
 - **Lucide React** - Ícones vetoriais otimizados
 
+### **Backend:**
+- **PHP 8.x** - APIs para Hostinger
+- **MySQL** - Banco de dados de leads
+- **SMTP Email** - Sistema de notificações
+
 ### **Integrações:**
 - **Facebook Pixel** - Tracking de conversões
 - **RD Station API** - CRM e automação de marketing
 - **WhatsApp Business API** - Comunicação direta
 
 ### **Deploy & Performance:**
-- **Vercel/Netlify Ready** - Deploy otimizado
+- **Hostinger** - Hospedagem compartilhada PHP/MySQL
 - **Image Optimization** - Next.js automatic
 - **Bundle Size** - ~104kB (otimizado)
 - **TypeScript Strict** - Zero erros de compilação
 
 ## 🚀 Deploy e Produção
 
-### **Configuração Rápida:**
+### **✅ PROJETO DEPLOYADO E FUNCIONANDO:**
+- **🌐 URL:** https://fernandaimobiliaria.com
+- **📊 Status:** 100% Operacional
+- **🗄️ Banco de Dados:** MySQL Hostinger conectado
+- **📧 Email:** Sistema de notificações ativo
 
-1. **Clone e Instale:**
-```bash
-git clone [repo-url]
-cd elev-landing-page
-npm install
-```
+### **Configuração para Deploy Hostinger:**
 
-2. **Configure Variáveis de Ambiente:**
-```bash
-# Copie e configure
-cp .env.example .env.local
-
-# Adicione seus tokens reais
-RD_STATION_TOKEN=seu_token_real
-NEXT_PUBLIC_FACEBOOK_PIXEL_ID=669854672792093
-```
-
-3. **Build e Deploy:**
+1. **Build do Projeto:**
 ```bash
 npm run build
-npm start
-# ou deploy para Vercel/Netlify
+# Gera arquivos estáticos na pasta /out
+```
+
+2. **Upload via FileZilla:**
+```bash
+📁 Upload para public_html/:
+├── /out/ (conteúdo completo) → Arquivos React
+└── /hostinger-php/ → APIs PHP + MySQL
+```
+
+3. **Configurações no Hostinger:**
+```bash
+# Banco de dados MySQL
+Host: localhost
+Database: u787187912_elev_leads_db
+User: u787187912_elev_leads_db
+Password: [configurado no painel]
+
+# Email SMTP
+Host: smtp.hostinger.com
+Port: 587
+User: fdms.nanda2@fernandaimobiliaria.com
+Password: [configurar no painel Hostinger]
 ```
 
 ### **Checklist de Deploy:**
@@ -140,42 +155,72 @@ elev-landing-page/
 │   ├── FacebookPixel.tsx    # Integração Facebook Pixel
 │   └── ImageManager.tsx     # Gerenciamento de imagens
 ├── 📁 pages/               # Páginas Next.js
-│   ├── api/                # API Routes
+│   ├── api/                # API Routes TypeScript (desenvolvimento)
 │   │   └── rdstation-lead.ts # Integração RD Station
 │   ├── _app.tsx            # App wrapper
 │   └── index.tsx           # Página principal
+├── 📁 hostinger-php/       # 🆕 Backend PHP para Hostinger
+│   ├── config.php          # Configurações MySQL/Email
+│   └── api/                # APIs PHP
+│       ├── lead-backup-final.php  # API principal de leads
+│       ├── dashboard.php           # Dashboard de leads  
+│       ├── email-service-fixed.php # Sistema de email
+│       └── test-email.php         # Teste de email
 ├── 📁 public/              # Assets estáticos
 │   └── images/             # Imagens otimizadas (25+ assets)
+├── 📁 lib/                 # Bibliotecas e configurações
+│   └── apiConfig.ts        # 🆕 Configuração de APIs (PHP/TS)
+├── 📁 out/                 # 🆕 Build estático para Hostinger
 ├── 📁 styles/              # Estilos globais
 │   └── globals.css         # Tailwind + customizações
 ├── 📁 docs/                # 📖 Documentação completa
 ├── .env.example            # Template de variáveis
-├── .env.local              # Configuração local (gitignored)
 └── elev_sacoma_landing.tsx # Componente principal
 ```
 
 ## ⚙️ Configuração
 
-### **Variáveis de Ambiente Obrigatórias:**
+### **🆕 Configuração Dual (Desenvolvimento + Produção):**
 
+#### **Desenvolvimento Local:**
 ```bash
-# RD Station CRM
-RD_STATION_TOKEN=seu_token_rdstation
-RD_STATION_IDENTIFIER=elev-sacoma-landing
+# 1. Clone do repositório
+git clone https://github.com/RobertoSilvaDevFullStack/Elev_Landing_Page_BACKUP.git
+cd Elev_Landing_Page_BACKUP
 
-# Facebook Pixel
-NEXT_PUBLIC_FACEBOOK_PIXEL_ID=669854672792093
+# 2. Instalar dependências
+npm install
+
+# 3. Configurar ambiente de desenvolvimento
+cp .env.example .env.local
+# Editar .env.local com suas configurações
+
+# 4. Executar em modo desenvolvimento
+npm run dev
+# Acesso: http://localhost:3000
 ```
 
-### **Configurações Opcionais:**
-
+#### **Deploy para Produção (Hostinger):**
 ```bash
-# Google Analytics (futuro)
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+# 1. Build estático
+npm run build
+# Gera pasta /out com arquivos otimizados
 
-# Ambiente
-NODE_ENV=production
-NEXT_PUBLIC_SITE_URL=https://elevparksacoma.com.br
+# 2. Configurar banco MySQL no painel Hostinger:
+# - Criar database: u787187912_elev_leads_db
+# - Executar SQL da tabela leads (ver docs/)
+
+# 3. Configurar email no painel Hostinger:
+# - Criar conta: fdms.nanda2@fernandaimobiliaria.com
+# - Definir senha SMTP
+
+# 4. Upload via FileZilla:
+# - /out/* → public_html/ (arquivos React)
+# - /hostinger-php/ → public_html/hostinger-php/ (APIs PHP)
+
+# 5. Testar funcionamento:
+# - Landing page: https://fernandaimobiliaria.com
+# - Debug: https://fernandaimobiliaria.com/hostinger-php/debug-connection.php
 ```
 
 ## 📖 Documentação
@@ -216,6 +261,32 @@ NEXT_PUBLIC_SITE_URL=https://elevparksacoma.com.br
 - **Build Time:** ~15s
 - **TypeScript:** 0 erros
 - **Lighthouse:** 95+ (estimado)
+- **🆕 Deploy Status:** ✅ LIVE em Hostinger
+- **🆕 Database:** ✅ MySQL conectado e funcionando
+- **🆕 Email System:** ✅ Notificações ativas
+
+### **🆕 CHANGELOG - Versão 2.0 (Hostinger Deploy):**
+
+#### **✅ Implementado:**
+- ✅ **Backend PHP completo** para Hostinger
+- ✅ **MySQL Database** integração total
+- ✅ **Sistema de Email** com SMTP Hostinger
+- ✅ **API híbrida** - TypeScript (dev) + PHP (prod)
+- ✅ **Static Export** otimizado para hospedagem compartilhada
+- ✅ **Debug Tools** para diagnóstico em produção
+- ✅ **CORS Headers** configurados
+- ✅ **Error Handling** robusto
+- ✅ **Deploy automatizado** via FileZilla
+
+#### **🔧 Arquivos Principais Adicionados:**
+```
+/hostinger-php/
+├── config.php                    # Config central MySQL/Email
+├── api/lead-backup-final.php     # API principal leads
+├── api/dashboard.php             # Dashboard administrativo
+├── api/email-service-fixed.php   # Sistema email otimizado
+└── debug-connection.php          # Debug de conexões
+```
 
 ---
 

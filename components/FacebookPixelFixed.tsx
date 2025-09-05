@@ -73,7 +73,7 @@ const FacebookPixel: React.FC<FacebookPixelProps> = ({ pixelId }) => {
       
       {/* No-script fallback SEM imagem (evita erro) */}
       <noscript>
-        <div style={{ display: 'none' }} data-pixel-id={pixelId}>
+        <div style={{ display: 'none' }} data-pixel-id="${pixelId}">
           Facebook Pixel NoScript Fallback
         </div>
       </noscript>

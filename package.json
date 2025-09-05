@@ -6,15 +6,18 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/nodemailer": "^7.0.1",
     "autoprefixer": "^10.4.16",
     "lucide-react": "^0.294.0",
     "mysql2": "^3.14.4",
     "next": "^14.0.0",
     "node-fetch": "^2.7.0",
+    "nodemailer": "^7.0.6",
     "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
