@@ -13,9 +13,9 @@ define('DB_CHARSET', 'utf8mb4');
 // Configurações do Email (SMTP)
 define('SMTP_HOST', 'smtp.hostinger.com');
 define('SMTP_PORT', 587);
-define('SMTP_USER', 'fdms.nanda2@fernandaimobiliaria.com');
+define('SMTP_USER', 'contato@fernandaimobiliaria.com'); // Conta principal do domínio
 define('SMTP_PASS', 'Julio824580@'); // Definir após configurar senha no painel Hostinger
-define('NOTIFICATION_EMAIL', 'fdms.nanda2@fernandaimobiliaria.com');
+define('NOTIFICATION_EMAIL', 'contato@fernandaimobiliaria.com'); // Mesmo email para receber notificações
 
 // Configurações gerais
 define('TIMEZONE', 'America/Sao_Paulo');
@@ -84,17 +84,29 @@ function jsonResponse($success, $message, $data = null, $httpCode = 200) {
 function logMessage($message, $type = 'INFO') {
     $timestamp = date('Y-m-d H:i:s');
     $logEntry = "[$timestamp] [$type] $message" . PHP_EOL;
-    error_log($logEntry, 3, __DIR__ . '/logs/elev-leads.log');
+    
+    // Tentar criar diretório de logs
+    $logDir = __DIR__ . '/logs';
+    if (!is_dir($logDir)) {
+        @mkdir($logDir, 0755, true);
+    }
+    
+    // Se não conseguir criar pasta, usar error_log padrão
+    if (is_dir($logDir) && is_writable($logDir)) {
+        error_log($logEntry, 3, $logDir . '/elev-leads.log');
+    } else {
+        error_log($logEntry);
+    }
 }
 
 /**
  * Headers de CORS e segurança
  */
 function setCORSHeaders() {
-    // CORS para permitir requests do React
-    header('Access-Control-Allow-Origin: https://fernandaimobiliaria.com');
-    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type, Authorization');
+    // CORS para permitir requests do React (mais permissivo para debug)
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
     header('Access-Control-Max-Age: 86400');
     
     // Headers de segurança

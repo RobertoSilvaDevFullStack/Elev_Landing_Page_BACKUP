@@ -1,6 +1,31 @@
-# 🏢 ELEV Park Sacomã II - Landing Page
+# 🏢 ELEV Park Sacomã II - Landing Pa### ✨ Funcionalidades
 
-> **Landing page moderna e otimizada para captação de leads imobiliários com integração RD Station CRM e Facebook Pixel**
+### 🏠 **Seções da Landing Page:**
+- ✅ **Hero Section** - Apresentação principal com CTA
+- ✅ **Plantas Disponíveis** - Carrossel interativo MCMV
+- ✅ **Galeria de Imagens** - Fotos do empreendimento
+- ✅ **Comodidades** - Amenities e diferenciais
+- ✅ **Localização** - Mapa e pontos de interesse
+- ✅ **Depoimentos** - Testimonials rotativos
+- ✅ **Múltiplos Formulários** - Captação em pontos estratégicos
+- ✅ **Footer Completo** - Informações e contatos
+
+### 🔧 **Funcionalidades Técnicas:**
+- ✅ **Formulários Inteligentes** - Validação e envio automático
+- ✅ **WhatsApp Integration** - Botão flutuante com tracking
+- ✅ **Facebook Pixel** - Eventos de conversão configurados
+- ✅ **RD Station CRM** - API de leads integrada
+- ✅ **SEO Otimizado** - Meta tags e Open Graph
+- ✅ **Performance** - Imagens otimizadas e lazy loading
+- ✅ **Mobile First** - Experiência perfeita em todos os dispositivos
+
+### 🚨 **Funcionalidades Avançadas de Conversão (v2.1.0):**
+- ✅ **Sistema de Notificações Push** - Prova social em tempo real
+- ✅ **Contador Dinâmico de Visualizações** - "X pessoas visualizando agora"
+- ✅ **6 Tipos de Notificações Sociais** - Leads recentes, visitas, interesse
+- ✅ **Triggers Contextuais** - Baseados nas ações do usuário
+- ✅ **Animações Suaves** - Fade in/out para melhor UX
+- ✅ **WhatsApp Otimizado** - Mensagens personalizadas e trackingge moderna e otimizada para captação de leads imobiliários com integração RD Station CRM e Facebook Pixel**
 
 ![Next.js](https://img.shields.io/badge/Next.js-14.2.32-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
@@ -251,19 +276,44 @@ npm run build
 | 📝 Formulários | ✅ **Funcionando** | Múltiplos pontos de conversão |
 | 🎯 RD Station | ✅ **Integrado** | API de leads configurada |
 | 📊 Facebook Pixel | ✅ **Ativo** | Tracking completo implementado |
-| 📱 WhatsApp | ✅ **Operacional** | Botão flutuante com tracking |
+| 📱 WhatsApp | ✅ **Otimizado** | Botão aprimorado com tracking |
 | 🖼️ Imagens | ✅ **Otimizadas** | 25+ assets implementados |
 | 📱 Mobile | ✅ **Responsivo** | Design mobile-first |
-| ⚡ Performance | ✅ **Otimizada** | Build ~104kB |
+| ⚡ Performance | ✅ **Otimizada** | Build ~107kB |
+| 🚨 **Push Notifications** | ✅ **ATIVO** | **Sistema de prova social** |
+| 👥 **Contador Visualizações** | ✅ **FUNCIONANDO** | **8-30 pessoas online** |
 
 ### **📈 Métricas de Performance:**
-- **Bundle Size:** 104kB (otimizado)
+- **Bundle Size:** 107kB (otimizado com notificações)
 - **Build Time:** ~15s
 - **TypeScript:** 0 erros
 - **Lighthouse:** 95+ (estimado)
 - **🆕 Deploy Status:** ✅ LIVE em Hostinger
 - **🆕 Database:** ✅ MySQL conectado e funcionando
 - **🆕 Email System:** ✅ Notificações ativas
+- **🚨 Push Notifications:** ✅ Sistema de prova social ativo
+
+### **🆕 CHANGELOG - Versão 2.1.0 (Sistema de Notificações Push):**
+
+#### **✅ NOVIDADES IMPLEMENTADAS:**
+- 🚨 **Sistema de Notificações Push** - Prova social em tempo real
+- 👥 **Contador Dinâmico de Visualizações** - Simula 8-30 pessoas online
+- 📊 **6 Tipos de Notificações Sociais:**
+  - 👤 "X pessoas visualizando agora"
+  - 📝 "Novo lead cadastrado há Y minutos"
+  - 🏠 "Planta Z foi vista X vezes hoje"
+  - 📞 "Alguém entrou em contato via WhatsApp"
+  - 👁️ "X pessoas visitaram esta página hoje"
+  - ⭐ "Apartamento reservado há X minutos"
+- 🎯 **Triggers Contextuais** - Ativação baseada em interação do usuário
+- ✨ **Animações Suaves** - Transições fade in/out otimizadas
+- 📱 **WhatsApp Aprimorado** - Mensagem contextual e tracking melhorado
+
+#### **🔧 MELHORIAS TÉCNICAS:**
+- ⚡ **Performance Otimizada** - Sistema de notificações sem impacto no carregamento
+- 📊 **Tracking Avançado** - Facebook Pixel eventos customizados para notificações
+- 🧠 **Estado Inteligente** - Gerenciamento de múltiplos estados de notificação
+- 🎮 **UX Aprimorada** - Notificações não intrusivas com timing perfeito
 
 ### **🆕 CHANGELOG - Versão 2.0 (Hostinger Deploy):**
 

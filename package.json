@@ -1,12 +1,11 @@
 {
   "name": "elev-sacoma-landing",
-  "version": "1.0.0",
-  "description": "Landing page para ELEV Park Sacomã II - Apartamentos com entrada FGTS",
+  "version": "2.1.0",
+  "description": "Landing page para ELEV Park Sacomã II - Apartamentos com entrada FGTS e sistema de notificações push",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
@@ -38,7 +37,10 @@
     "sacoma",
     "fgts",
     "investimento",
-    "primeira-casa"
+    "primeira-casa",
+    "push-notifications",
+    "social-proof",
+    "conversion-optimization"
   ],
   "author": "ELEV Park Sacomã II",
   "license": "MIT"

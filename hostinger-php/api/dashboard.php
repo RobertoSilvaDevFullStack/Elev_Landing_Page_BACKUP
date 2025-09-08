@@ -210,13 +210,31 @@ try {
                 jsonResponse(true, 'Lead encontrado', $lead);
                 
             } else {
-                // GET /dashboard - Lista paginada
+                // GET /dashboard - Formato compatível com React Dashboard
                 $page = (int)($query['page'] ?? 1);
                 $limit = (int)($query['limit'] ?? 50);
                 $search = $query['search'] ?? '';
                 
-                $result = getAllLeads($page, $limit, $search);
-                jsonResponse(true, 'Leads obtidos com sucesso', $result);
+                $leadsResult = getAllLeads($page, $limit, $search);
+                $statsResult = getLeadsStats();
+                
+                // Formato esperado pelo React Dashboard
+                $dashboardData = [
+                    'leads' => $leadsResult['leads'],
+                    'statistics' => [
+                        'total_leads' => $statsResult['total'],
+                        'last_lead_date' => $leadsResult['leads'][0]['created_at'] ?? null
+                    ],
+                    'daily_leads' => [], // Pode ser implementado depois
+                    'interest_types' => array_map(function($item) {
+                        return [
+                            'interest_type' => $item['interest_type'],
+                            'total' => $item['count']
+                        ];
+                    }, $statsResult['by_interest'])
+                ];
+                
+                jsonResponse(true, 'Dashboard carregado com sucesso', ['data' => $dashboardData]);
             }
             break;
             
