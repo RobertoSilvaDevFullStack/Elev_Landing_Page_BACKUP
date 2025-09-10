@@ -1,31 +1,4 @@
-# 🏢 ELEV Park Sacomã II - Landing Pa### ✨ Funcionalidades
-
-### 🏠 **Seções da Landing Page:**
-- ✅ **Hero Section** - Apresentação principal com CTA
-- ✅ **Plantas Disponíveis** - Carrossel interativo MCMV
-- ✅ **Galeria de Imagens** - Fotos do empreendimento
-- ✅ **Comodidades** - Amenities e diferenciais
-- ✅ **Localização** - Mapa e pontos de interesse
-- ✅ **Depoimentos** - Testimonials rotativos
-- ✅ **Múltiplos Formulários** - Captação em pontos estratégicos
-- ✅ **Footer Completo** - Informações e contatos
-
-### 🔧 **Funcionalidades Técnicas:**
-- ✅ **Formulários Inteligentes** - Validação e envio automático
-- ✅ **WhatsApp Integration** - Botão flutuante com tracking
-- ✅ **Facebook Pixel** - Eventos de conversão configurados
-- ✅ **RD Station CRM** - API de leads integrada
-- ✅ **SEO Otimizado** - Meta tags e Open Graph
-- ✅ **Performance** - Imagens otimizadas e lazy loading
-- ✅ **Mobile First** - Experiência perfeita em todos os dispositivos
-
-### 🚨 **Funcionalidades Avançadas de Conversão (v2.1.0):**
-- ✅ **Sistema de Notificações Push** - Prova social em tempo real
-- ✅ **Contador Dinâmico de Visualizações** - "X pessoas visualizando agora"
-- ✅ **6 Tipos de Notificações Sociais** - Leads recentes, visitas, interesse
-- ✅ **Triggers Contextuais** - Baseados nas ações do usuário
-- ✅ **Animações Suaves** - Fade in/out para melhor UX
-- ✅ **WhatsApp Otimizado** - Mensagens personalizadas e trackingge moderna e otimizada para captação de leads imobiliários com integração RD Station CRM e Facebook Pixel**
+# 🏢 ELEV Park Sacomã II - Landing Page ✨ Funcionalidades
 
 ![Next.js](https://img.shields.io/badge/Next.js-14.2.32-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
@@ -80,6 +53,33 @@
 - ✅ **SEO Otimizado** - Meta tags e Open Graph
 - ✅ **Performance** - Imagens otimizadas e lazy loading
 - ✅ **Mobile First** - Experiência perfeita em todos os dispositivos
+
+### 🏠 **Seções da Landing Page:**
+- ✅ **Hero Section** - Apresentação principal com CTA
+- ✅ **Plantas Disponíveis** - Carrossel interativo MCMV
+- ✅ **Galeria de Imagens** - Fotos do empreendimento
+- ✅ **Comodidades** - Amenities e diferenciais
+- ✅ **Localização** - Mapa e pontos de interesse
+- ✅ **Depoimentos** - Testimonials rotativos
+- ✅ **Múltiplos Formulários** - Captação em pontos estratégicos
+- ✅ **Footer Completo** - Informações e contatos
+
+### 🔧 **Funcionalidades Técnicas:**
+- ✅ **Formulários Inteligentes** - Validação e envio automático
+- ✅ **WhatsApp Integration** - Botão flutuante com tracking
+- ✅ **Facebook Pixel** - Eventos de conversão configurados
+- ✅ **RD Station CRM** - API de leads integrada
+- ✅ **SEO Otimizado** - Meta tags e Open Graph
+- ✅ **Performance** - Imagens otimizadas e lazy loading
+- ✅ **Mobile First** - Experiência perfeita em todos os dispositivos
+
+### 🚨 **Funcionalidades Avançadas de Conversão (v2.1.0):**
+- ✅ **Sistema de Notificações Push** - Prova social em tempo real
+- ✅ **Contador Dinâmico de Visualizações** - "X pessoas visualizando agora"
+- ✅ **6 Tipos de Notificações Sociais** - Leads recentes, visitas, interesse
+- ✅ **Triggers Contextuais** - Baseados nas ações do usuário
+- ✅ **Animações Suaves** - Fade in/out para melhor UX
+- ✅ **WhatsApp Otimizado** - Mensagens personalizadas e trackingge moderna e otimizada para captação de leads imobiliários com integração RD Station CRM e Facebook Pixel**
 
 ## 🛠️ Tecnologias
 
